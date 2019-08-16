@@ -22,8 +22,6 @@ jobs:
         - run:
             command: mvn spotless:check
 
-      - run: mvn dependency:go-offline
-
     test:
       docker:
         - image: circleci/openjdk:11-jdk-browsers
