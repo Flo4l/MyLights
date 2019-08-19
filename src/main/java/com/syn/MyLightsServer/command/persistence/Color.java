@@ -2,8 +2,9 @@ package com.syn.MyLightsServer.command.persistence;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 
-public class Color {
+public class Color implements Serializable {
 
 	@Min(0)
 	@Max(255)

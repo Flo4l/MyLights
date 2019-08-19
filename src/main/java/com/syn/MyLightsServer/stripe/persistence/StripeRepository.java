@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface StripeRepository extends JpaRepository<Stripe, Integer> {
 
-    Stripe getById(int id);
+	Stripe getById(int id);
 
-    List<Stripe> getByGroupIsNull();
+	List<Stripe> getByGroupIsNull();
 
-    List<Stripe> getByGroup(Group group);
+	List<Stripe> getByGroup(Group group);
 }

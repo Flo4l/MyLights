@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommandRepository extends JpaRepository<Command, Integer> {
 
-    Command findByCommandID();
+	Command findById(int id);
 
-    Command findByGroup(Group group);
+	Command findByGroup(Group group);
 }

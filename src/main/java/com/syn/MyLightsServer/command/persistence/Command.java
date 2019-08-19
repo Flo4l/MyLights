@@ -24,12 +24,12 @@ public class Command {
 	private int id;
 
 	@NotNull
+	private char mode;
+
+	@NotNull
 	@Min(1)
 	@Max(1200)
 	private int secondsToNextColor;
-
-	@NotNull
-	private char mode;
 
 	@NotNull
 	@OneToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
@@ -84,5 +84,13 @@ public class Command {
 
 	public void setColors(ArrayList<Color> colors) {
 		this.colors = colors;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 }

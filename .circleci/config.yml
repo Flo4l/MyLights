@@ -14,30 +14,41 @@ jobs:
     - run:
         command: mvn compile
 
-    spotless:
-      docker:
-        - image: circleci/openjdk:11-jdk-browsers
-      steps:
-        - checkout
-        - run:
-            command: mvn spotless:check
+  spotless:
+    docker:
+      - image: circleci/openjdk:11-jdk-browsers
+    steps:
+      - checkout
+      - run:
+          command: mvn spotless:check
 
-    test:
-      docker:
-        - image: circleci/openjdk:11-jdk-browsers
-      steps:
-        - checkout
-        - run:
-            command: mvn test
+  start:
+    docker:
+      - image: circleci/openjdk:11-jdk-browsers
+    steps:
+      - checkout
+      - run:
+          command: mvn spring-boot:start
 
-    workflows:
-      version: 2
-      build_check_test:
-        jobs:
+  test:
+    docker:
+      - image: circleci/openjdk:11-jdk-browsers
+    steps:
+      - checkout
+      - run:
+          command: mvn test
+
+workflows:
+  version: 2
+  build_check_test:
+    jobs:
+      - build
+      - spotless:
+          requires:
           - build
-          - test:
-              requires:
-              - build
-          - spotless:
-              requires:
-              - build
+      - start:
+          requires:
+          - build
+      - test:
+            requires:
+          - build
