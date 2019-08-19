@@ -1,4 +1,4 @@
-package com.syn.MyLightsServer.command;
+package com.syn.MyLightsServer.command.persistence;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

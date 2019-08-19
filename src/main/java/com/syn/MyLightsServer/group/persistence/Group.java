@@ -1,6 +1,6 @@
-package com.syn.MyLightsServer.group;
+package com.syn.MyLightsServer.group.persistence;
 
-import com.syn.MyLightsServer.user.User;
+import com.syn.MyLightsServer.user.persistence.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,7 +11,7 @@ public class Group {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int groupID;
+	private int id;
 
 	@NotNull
 	private String groupName;
@@ -29,12 +29,12 @@ public class Group {
 		this.user = user;
 	}
 
-	public int getGroupID() {
-		return groupID;
+	public int getId() {
+		return id;
 	}
 
-	public void setGroupID(int groupID) {
-		this.groupID = groupID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getGroupName() {

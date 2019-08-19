@@ -1,4 +1,4 @@
-package com.syn.MyLightsServer.user;
+package com.syn.MyLightsServer.user.persistence;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userID;
+	private int id;
 
 	@NotNull
 	private String username;
@@ -26,12 +26,12 @@ public class User {
 		this.password = password;
 	}
 
-	public int getUserID() {
-		return userID;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
