@@ -8,6 +8,6 @@ public class StdController {
 
 	@GetMapping("/")
 	public String home() {
-		return "/home.html";
+		return "sites/panel.html";
 	}
 }
