@@ -14,7 +14,7 @@ WORKDIR /MyLights
 
 VOLUME /tmp
 
-ARG DEPENDENCY=./kicker/target/dependency
+ARG DEPENDENCY=./MyLights/target/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib ./lib
 COPY --from=build ${DEPENDENCY}/META-INF ./META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes ./
