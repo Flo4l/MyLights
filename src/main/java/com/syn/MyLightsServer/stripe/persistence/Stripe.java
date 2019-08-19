@@ -1,6 +1,6 @@
-package com.syn.MyLightsServer.stripe;
+package com.syn.MyLightsServer.stripe.persistence;
 
-import com.syn.MyLightsServer.group.Group;
+import com.syn.MyLightsServer.group.persistence.Group;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

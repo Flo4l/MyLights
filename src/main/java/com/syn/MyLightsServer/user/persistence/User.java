@@ -1,4 +1,4 @@
-package com.syn.MyLightsServer.user;
+package com.syn.MyLightsServer.user.persistence;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
