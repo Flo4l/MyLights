@@ -93,4 +93,24 @@ public class Command {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+
+	public String toJSON() {
+		String json = "{\"command\":{";
+		json += "\"mode\":\"" + mode + "\",";
+		json += "\"secondsToNextColor\":" + secondsToNextColor + ",";
+		json += "\"groupId\":" + group.getId() + ",";
+		json += "\"colors\":[";
+
+		for (Color c : colors) {
+			json += "{\"red\":" + c.getRed() + ",";
+			json += "\"green\":" + c.getGreen() + ",";
+			json += "\"blue\":" + c.getBlue() + "}";
+			if (colors.indexOf(c) < colors.size() - 1) {
+				json += ",";
+			}
+		}
+
+		json += "]}}";
+		return json;
+	}
 }

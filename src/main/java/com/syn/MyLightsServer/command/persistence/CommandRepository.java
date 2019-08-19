@@ -10,4 +10,6 @@ public interface CommandRepository extends JpaRepository<Command, Integer> {
 	Command findById(int id);
 
 	Command findByGroup(Group group);
+
+	void removeAllByGroup(Group group);
 }

@@ -15,6 +15,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
@@ -29,6 +30,7 @@ public class SetCommandService {
 		this.groupService = groupService;
 	}
 
+	@Transactional
 	public void setCommand(String jsonCommand) {
 		try {
 			Command command = extractCommand(jsonCommand);
@@ -36,6 +38,7 @@ public class SetCommandService {
 			checkValidInterval(command);
 			checkValidColors(command);
 			checkValidGroup(command);
+			commandRepository.removeAllByGroup(command.getGroup());
 			commandRepository.save(command);
 		} catch (Exception e) {
 			e.printStackTrace();
