@@ -1,7 +1,5 @@
 package com.syn.MyLightsServer.group.persistence;
 
-import com.syn.MyLightsServer.user.persistence.User;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,17 +14,12 @@ public class Group {
 	@NotNull
 	private String groupName;
 
-	@NotNull
-	@ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL)
-	private User user;
-
 	public Group() {
-		this("", new User());
+		this("");
 	}
 
-	public Group(@NotNull String groupName, @NotNull User user) {
+	public Group(@NotNull String groupName) {
 		this.groupName = groupName;
-		this.user = user;
 	}
 
 	public int getId() {
@@ -45,11 +38,4 @@ public class Group {
 		this.groupName = groupName;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 }

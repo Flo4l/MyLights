@@ -1,5 +1,5 @@
 # MyLightsServer
 Server for MyLights Project
 
-DB Architecture
+ER Diagram
 ![DB Architecture](db/architektur.png)
