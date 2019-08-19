@@ -11,7 +11,7 @@ public class Stripe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int stripeID;
+	private int id;
 
 	@NotNull
 	private String mac;
@@ -29,14 +29,15 @@ public class Stripe {
 	public Stripe(@NotNull String mac, @NotNull String name) {
 		this.mac = mac;
 		this.name = name;
+		this.group = null;
 	}
 
-	public int getStripeID() {
-		return stripeID;
+	public int getId() {
+		return id;
 	}
 
-	public void setStripeID(int stripeID) {
-		this.stripeID = stripeID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getMac() {

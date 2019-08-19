@@ -21,7 +21,7 @@ public class Command {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int commandID;
+	private int id;
 
 	@NotNull
 	@Min(1)
@@ -54,12 +54,12 @@ public class Command {
 		this.colors = colors;
 	}
 
-	public int getCommandID() {
-		return commandID;
+	public int getId() {
+		return id;
 	}
 
-	public void setCommandID(int commandID) {
-		this.commandID = commandID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getSecondsToNextColor() {
