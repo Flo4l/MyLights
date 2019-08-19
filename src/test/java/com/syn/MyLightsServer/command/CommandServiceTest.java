@@ -2,6 +2,7 @@ package com.syn.MyLightsServer.command;
 
 import com.syn.MyLightsServer.command.persistence.CommandRepository;
 import com.syn.MyLightsServer.command.services.SetCommandService;
+import com.syn.MyLightsServer.group.persistence.Group;
 import com.syn.MyLightsServer.group.services.GroupService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 
@@ -67,6 +70,7 @@ public class CommandServiceTest {
 	public void whenJsonDataValidCommandShouldBeSaved() {
 		// given
 		String json = generateValidComandJsonString();
+		given(groupService.getGroupById(anyInt())).willReturn(new Group());
 
 		// when
 		setCommandService.setCommand(json);
