@@ -9,6 +9,7 @@ import com.syn.MyLightsServer.command.persistence.Command;
 import com.syn.MyLightsServer.command.persistence.CommandRepository;
 import com.syn.MyLightsServer.group.persistence.Group;
 import com.syn.MyLightsServer.group.services.GroupService;
+import com.syn.MyLightsServer.stripe.services.MessageStripeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -23,11 +24,13 @@ public class SetCommandService {
 
 	private final CommandRepository commandRepository;
 	private final GroupService groupService;
+	private final MessageStripeService messageStripeService;
 
 	@Autowired
-	public SetCommandService(CommandRepository commandRepository, GroupService groupService) {
+	public SetCommandService(CommandRepository commandRepository, GroupService groupService, MessageStripeService messageStripeService) {
 		this.commandRepository = commandRepository;
 		this.groupService = groupService;
+		this.messageStripeService = messageStripeService;
 	}
 
 	@Transactional
@@ -38,6 +41,7 @@ public class SetCommandService {
 			checkValidInterval(command);
 			checkValidColors(command);
 			checkValidGroup(command);
+			messageStripeService.sendCommand(command);
 			commandRepository.removeAllByGroup(command.getGroup());
 			commandRepository.save(command);
 		} catch (Exception e) {

@@ -4,6 +4,7 @@ import com.syn.MyLightsServer.command.persistence.CommandRepository;
 import com.syn.MyLightsServer.command.services.SetCommandService;
 import com.syn.MyLightsServer.group.persistence.Group;
 import com.syn.MyLightsServer.group.services.GroupService;
+import com.syn.MyLightsServer.stripe.services.MessageStripeService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +28,9 @@ public class CommandServiceTest {
 
 	@Mock
 	private CommandRepository commandRepository;
+
+	@Mock
+	private MessageStripeService messageStripeService;
 
 	@InjectMocks
 	private SetCommandService setCommandService;
@@ -76,6 +80,7 @@ public class CommandServiceTest {
 		setCommandService.setCommand(json);
 
 		//then
+		then(messageStripeService).should(times(1)).sendCommand(any());
 		then(commandRepository).should(times(1)).save(any());
 	}
 }
