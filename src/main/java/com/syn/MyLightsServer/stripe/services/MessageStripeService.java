@@ -29,21 +29,25 @@ public class MessageStripeService {
 	public void sendCommand(Command command) {
 		List<Stripe> targetStripes = stripeRepository.getByGroup(command.getGroup());
 		targetStripes.stream().forEach(s -> {
-			try {
-				Socket socket = new Socket(s.getIp(), STRIPE_PORT);
-				OutputStream os = socket.getOutputStream();
-				os.write((command.toJSON()).getBytes());
-				os.flush();
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
+			sendMessage(s, command.toJSON());
+		});
+	}
 
-				}
-				os.close();
-				socket.close();
-			} catch (IOException e) {
+	private void sendMessage(Stripe stripe, String message) {
+		try {
+			Socket socket = new Socket(stripe.getIp(), STRIPE_PORT);
+			OutputStream os = socket.getOutputStream();
+			os.write(message.getBytes());
+			os.flush();
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
 
 			}
-		});
+			os.close();
+			socket.close();
+		} catch (IOException e) {
+
+		}
 	}
 }

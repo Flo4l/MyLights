@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Integer> {
 
-	List<Group> findAllByIdIsNotNull();
-
 	Group findById(int id);
+
+	Group findByGroupName(String groupName);
 }
