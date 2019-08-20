@@ -50,13 +50,13 @@ public class GroupService {
 	}
 
 	private void checkGroupName(Group group) throws InvalidGroupNameException {
-		if(group.getGroupName().equals("")) {
+		if (group.getGroupName().equals("")) {
 			throw new InvalidGroupNameException();
 		}
 	}
 
 	private void checkGroupAlredyExisting(Group group) throws GroupAlreadyExistingException {
-		if(groupRepository.findByGroupName(group.getGroupName()) != null) {
+		if (groupRepository.findByGroupName(group.getGroupName()) != null) {
 			throw new GroupAlreadyExistingException();
 		}
 	}

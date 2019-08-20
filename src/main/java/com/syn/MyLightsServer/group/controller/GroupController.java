@@ -10,37 +10,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/group")
 public class GroupController {
 
-    private final GroupService groupService;
+	private final GroupService groupService;
 
-    public GroupController(GroupService groupService) {
-        this.groupService = groupService;
-    }
+	public GroupController(GroupService groupService) {
+		this.groupService = groupService;
+	}
 
-    @PostMapping("/create")
-    @ResponseBody
-    public String create(String groupName) {
-        groupService.createGroup(groupName);
-        return "";
-    }
+	@PostMapping("/create")
+	@ResponseBody
+	public String create(String groupName) {
+		groupService.createGroup(groupName);
+		return "";
+	}
 
-    @PostMapping("/update")
-    @ResponseBody
-    public String update(int groupId, String groupName) {
-        groupService.updateGroupName(groupId, groupName);
-        return "";
-    }
+	@PostMapping("/update")
+	@ResponseBody
+	public String update(int groupId, String groupName) {
+		groupService.updateGroupName(groupId, groupName);
+		return "";
+	}
 
-    @PostMapping("/delete")
-    @ResponseBody
-    public String delete(int groupId) {
-        groupService.deleteGroup(groupId);
-        return "";
-    }
+	@PostMapping("/delete")
+	@ResponseBody
+	public String delete(int groupId) {
+		groupService.deleteGroup(groupId);
+		return "";
+	}
 
-    @PostMapping("/get")
-    @ResponseBody
-    public String get() {
-        //TODO send all groups as JSON
-        return "";
-    }
+	@PostMapping("/get")
+	@ResponseBody
+	public String get() {
+		//TODO send all groups as JSON
+		return "";
+	}
 }
