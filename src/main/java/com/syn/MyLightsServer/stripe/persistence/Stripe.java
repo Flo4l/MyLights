@@ -14,7 +14,7 @@ public class Stripe {
 	private int id;
 
 	@NotNull
-	private String mac;
+	private String ip;
 
 	@NotNull
 	private String name;
@@ -26,8 +26,8 @@ public class Stripe {
 		this("", "");
 	}
 
-	public Stripe(@NotNull String mac, @NotNull String name) {
-		this.mac = mac;
+	public Stripe(@NotNull String ip, @NotNull String name) {
+		this.ip = ip;
 		this.name = name;
 		this.group = null;
 	}
@@ -40,12 +40,12 @@ public class Stripe {
 		this.id = id;
 	}
 
-	public String getMac() {
-		return mac;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setMac(String mac) {
-		this.mac = mac;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public String getName() {
@@ -63,4 +63,5 @@ public class Stripe {
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+
 }
