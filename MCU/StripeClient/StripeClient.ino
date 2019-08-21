@@ -12,6 +12,8 @@ const int greenPin = D2;
 const int bluePin = D3;
 
 const int MAX_COLORS = 12;
+int currentColor = 0;
+unsigned long lastUpdated = 0;
 
 char colorMode = 's';
 unsigned int secondsToNextColor = 1;
@@ -30,16 +32,36 @@ Color colorArray[MAX_COLORS];
 Vector<Color> colors;
 
 //Writes colors to pins
-void writePins(byte red, byte green, byte blue) {
-  analogWrite(redPin, red);
-  analogWrite(greenPin, green);
-  analogWrite(bluePin, blue);
+void writePins(Color color) {
+  analogWrite(redPin, color.red);
+  analogWrite(greenPin, color.green);
+  analogWrite(bluePin, color.blue);
 }
 
+//Writes first color in vector
 void displaySingleColor() {
-  writePins(colors.at(0).red,
-            colors.at(0).green,
-            colors.at(0).blue);
+  writePins(colors.at(0));
+}
+
+//Switches colors in vector after secondsToNextColor
+void displayMultipleColors() {
+  if(millis() - lastUpdated >= secondsToNextColor * 1000) {
+    currentColor = (currentColor + 1) % colors.size();
+    writePins(colors.at(currentColor));
+    lastUpdated = millis();
+  }
+}
+
+//Invokes method to display color based on the mode
+void updateColor() {
+  switch (colorMode) {
+  case 's':
+    displaySingleColor();
+    break;
+  case 'm':
+    displayMultipleColors();
+    break;
+  }
 }
 
 void interpretJson(String* jsonString) {
@@ -127,6 +149,6 @@ void loop() {
   if(input.length() > 0) {
     Serial.println(input);
     interpretJson(&input);
-    displaySingleColor();
-  } 
+  }
+  updateColor();
 }
