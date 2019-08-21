@@ -1,4 +1,6 @@
 #include <ESP8266WiFi.h>
+#include <ArduinoJson.h>
+#include <Vector.h>
 
 const char* ssid     = "AndroidAP_SYN";
 const char* password = "12345679";
@@ -9,20 +11,72 @@ const int redPin = D1;
 const int greenPin = D2;
 const int bluePin = D3;
 
+const int MAX_COLORS = 12;
+
+char colorMode = 's';
+unsigned int secondsToNextColor = 1;
+byte groupId;
+
 WiFiServer server(port);
 
 //Saved the RGB values of a color
-struct Color {
-  byte red;
-  byte green;
-  byte blue;
+class Color {
+  public:
+    byte red;
+    byte green;
+    byte blue;
 };
+Color colorArray[MAX_COLORS];
+Vector<Color> colors;
 
 //Writes colors to pins
 void writePins(byte red, byte green, byte blue) {
   analogWrite(redPin, red);
   analogWrite(greenPin, green);
   analogWrite(bluePin, blue);
+}
+
+void displaySingleColor() {
+  writePins(colors.at(0).red,
+            colors.at(0).green,
+            colors.at(0).blue);
+}
+
+void interpretJson(String* jsonString) {
+  //Convert String to JsonDocument
+  const int capacity = JSON_OBJECT_SIZE(1)
+                      + JSON_OBJECT_SIZE(4)
+                      + JSON_ARRAY_SIZE(MAX_COLORS)
+                      + MAX_COLORS * JSON_OBJECT_SIZE(3);
+  DynamicJsonDocument doc(capacity);
+  DeserializationError err=deserializeJson(doc, *jsonString);
+  if(err) {
+    Serial.println(err.c_str());
+  }
+
+  //Execute method based on type of JSON Object
+  if(doc.containsKey("command")) {
+    extractCommand(doc);
+  }
+}
+
+void extractCommand(DynamicJsonDocument doc) {
+  //Extract command values
+  const char* c = doc["command"]["mode"];
+  colorMode = c[0];
+  secondsToNextColor = doc["command"]["secondsToNextColor"];
+  groupId = doc["command"]["groupId"];
+  JsonArray jsonColors = doc["command"]["colors"];
+
+  //Add colors to vector
+  colors.clear();
+  for(int i = 0; i < jsonColors.size(); i++) {
+    Color c;
+    c.red = jsonColors[i]["red"];
+    c.green = jsonColors[i]["green"];
+    c.blue = jsonColors[i]["blue"];
+    colors.push_back(c);
+  }
 }
 
 //Returns a String if one is received
@@ -59,10 +113,12 @@ void setup() {
   }
   Serial.println("");
   Serial.println("WiFi connected.");
-  Serial.println("IP address: ");
+  Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  Serial.println("");
 
   //Start server
+  colors.setStorage(colorArray);
   server.begin();
 }
 
@@ -70,5 +126,7 @@ void loop() {
   String input = readInput();
   if(input.length() > 0) {
     Serial.println(input);
+    interpretJson(&input);
+    displaySingleColor();
   } 
 }
