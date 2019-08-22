@@ -1,6 +1,7 @@
 package com.syn.MyLightsServer.command.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
