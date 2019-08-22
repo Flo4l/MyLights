@@ -11,6 +11,8 @@ public interface StripeRepository extends JpaRepository<Stripe, Integer> {
 
 	Stripe getById(int id);
 
+	Stripe getByMac(String mac);
+
 	List<Stripe> getByGroupIsNull();
 
 	List<Stripe> getByGroup(Group group);

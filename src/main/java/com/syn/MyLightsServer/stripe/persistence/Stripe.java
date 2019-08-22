@@ -1,6 +1,7 @@
 package com.syn.MyLightsServer.stripe.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,9 @@ public class Stripe {
 	private String ip;
 
 	@NotNull
+	private String mac;
+
+	@NotNull
 	private String name;
 
 	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.DETACH)
@@ -26,9 +30,10 @@ public class Stripe {
 		this("", "");
 	}
 
-	public Stripe(@NotNull String ip, @NotNull String name) {
+	public Stripe(@NotNull String ip, @NotNull String mac) {
 		this.ip = ip;
-		this.name = name;
+		this.mac = mac;
+		this.name = "New Stripe";
 		this.group = null;
 	}
 

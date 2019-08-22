@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/stripe")
 public class StripeController {
@@ -16,9 +18,16 @@ public class StripeController {
 		this.assignStripeService = assignStripeService;
 	}
 
+	@PostMapping("/register")
+	@ResponseBody
+	public String register(String ip, String mac) {
+		assignStripeService.registerStripe(ip, mac);
+		return "";
+	}
+
 	@PostMapping("/setgroup")
 	@ResponseBody
-	public String setGroup(int stripeId, int groupId) {
+	public String setGroup(int stripeId, int groupId, HttpServletRequest request) {
 		assignStripeService.assignStripeToGroup(stripeId, groupId);
 		return "";
 	}

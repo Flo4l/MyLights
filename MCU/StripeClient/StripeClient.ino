@@ -1,6 +1,10 @@
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 #include <Vector.h>
+
+String serverAddress = "192.168.43.221";
+HTTPClient http;
 
 //Wifi access
 const char* ssid     = "AndroidAP_SYN";
@@ -187,6 +191,15 @@ String readInput() {
   return input;
 }
 
+//Sends a POST request to the Server for registering or updating the ip
+void registerAtServer() {
+  String url = "http://" + serverAddress + "/stripe/register";
+  String params = "ip=" + WiFi.localIP().toString() + String("&mac=") + String(WiFi.macAddress());
+  http.begin(url);
+  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  http.POST(params);
+}
+
 void setup() {
   Serial.begin(115200);
   delay(1000);
@@ -211,6 +224,8 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   Serial.println("");
+
+  registerAtServer();
 
   //Setup storage and start server
   colors.setStorage(colorArray);
