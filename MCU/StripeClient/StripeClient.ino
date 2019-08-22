@@ -2,24 +2,21 @@
 #include <ArduinoJson.h>
 #include <Vector.h>
 
+//Wifi access
 const char* ssid     = "AndroidAP_SYN";
 const char* password = "12345679";
 const char* deviceName = "NodeMCU";
-const int port = 8881;
 
+//Port and Server
+const int port = 8881;
+WiFiServer server(port);
+
+//Number of colors that can be stored
+const int MAX_COLORS = 12;
+//Pin definitions
 const int redPin = D1;
 const int greenPin = D2;
 const int bluePin = D3;
-
-const int MAX_COLORS = 12;
-int currentColor = 0;
-unsigned long lastUpdated = 0;
-
-char colorMode = 's';
-unsigned int secondsToNextColor = 1;
-byte groupId;
-
-WiFiServer server(port);
 
 //Saved the RGB values of a color
 class Color {
@@ -31,40 +28,113 @@ class Color {
 Color colorArray[MAX_COLORS];
 Vector<Color> colors;
 
+//Display color mode [s]ingle,[m]ultiple, [f]ading
+char colorMode = 's';
+//Mow many seconds until color is changed
+unsigned int secondsToNextColor = 1;
+//Next color to display
+int nextColor = 0;
+//Last time in millis() the Color changed
+unsigned long lastUpdated = 0;
+//Last time in millis() the fading color was updated
+unsigned long fadeUpdated = 0;
+//Values for fading color to display
+double fadeRed = 0;
+double fadeGreen = 0;
+double fadeBlue = 0;
+//Value that gets added to the fading color values each millisecond
+double stepRed = 0;
+double stepGreen = 0;
+double stepBlue = 0;
+
+//ID of Group of the Stripe
+byte groupId;
+
 //Writes colors to pins
 void writePins(Color color) {
-  analogWrite(redPin, color.red);
-  analogWrite(greenPin, color.green);
-  analogWrite(bluePin, color.blue);
+  writePins(color.red,
+            color.green,
+            color.blue);
 }
 
-//Writes first color in vector
+//Writes colors to pins
+void writePins(byte red, byte green, byte blue) {
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);
+}
+
+//Displays first color of vector
 void displaySingleColor() {
   writePins(colors.at(0));
 }
 
-//Switches colors in vector after secondsToNextColor
+//Switches colors of vector after secondsToNextColor
 void displayMultipleColors() {
   if(millis() - lastUpdated >= secondsToNextColor * 1000) {
-    currentColor = (currentColor + 1) % colors.size();
-    writePins(colors.at(currentColor));
+    writePins(colors.at(nextColor));
     lastUpdated = millis();
+    nextColor = (nextColor + 1) % colors.size();
+  }
+}
+
+//Fades colors of vector. Next total color after secondsToNextColor
+void displayFadingColors() {
+
+  //Update fade color Values and display them
+  unsigned long now = millis();
+  fadeRed += stepRed * (now - fadeUpdated);
+  fadeGreen += stepGreen * (now - fadeUpdated);
+  fadeBlue += stepBlue * (now - fadeUpdated);
+  fadeUpdated = now;
+  writePins(fadeRed, fadeGreen, fadeBlue);
+
+  //Calculate stats for next color
+  if(now - lastUpdated >= secondsToNextColor * 1000) {
+    nextColor = (nextColor + 1) % colors.size();
+    calcColorFadeStats();
+    lastUpdated = now;
+  }
+}
+
+//Calculates Values for color fading
+void calcColorFadeStats() {
+  double redDiff = colors.at(nextColor).red - fadeRed;
+  stepRed = redDiff / (secondsToNextColor * 1000);
+  double greenDiff = colors.at(nextColor).green - fadeGreen;
+  stepGreen = greenDiff / (secondsToNextColor * 1000);
+  double blueDiff = colors.at(nextColor).blue - fadeBlue;
+  stepBlue = blueDiff / (secondsToNextColor * 1000);
+}
+
+//Sets up values after color change
+void initColorStates() {
+  nextColor = 0;
+  lastUpdated = millis();
+  if(colorMode == 'f') {
+     calcColorFadeStats();
+     fadeUpdated = millis();
   }
 }
 
 //Invokes method to display color based on the mode
 void updateColor() {
   switch (colorMode) {
-  case 's':
-    displaySingleColor();
-    break;
-  case 'm':
-    displayMultipleColors();
-    break;
+    case 's':
+      displaySingleColor();
+      break;
+    case 'm':
+      displayMultipleColors();
+      break;
+    case 'f':
+      displayFadingColors();
+      break;
   }
 }
 
+//Converts String to a JSON oject and executes method based on its type
 void interpretJson(String* jsonString) {
+
   //Convert String to JsonDocument
   const int capacity = JSON_OBJECT_SIZE(1)
                       + JSON_OBJECT_SIZE(4)
@@ -82,7 +152,9 @@ void interpretJson(String* jsonString) {
   }
 }
 
+//Assignes values from a command type JSON object
 void extractCommand(DynamicJsonDocument doc) {
+
   //Extract command values
   const char* c = doc["command"]["mode"];
   colorMode = c[0];
@@ -99,6 +171,7 @@ void extractCommand(DynamicJsonDocument doc) {
     c.blue = jsonColors[i]["blue"];
     colors.push_back(c);
   }
+  initColorStates();
 }
 
 //Returns a String if one is received
@@ -139,16 +212,22 @@ void setup() {
   Serial.println(WiFi.localIP());
   Serial.println("");
 
-  //Start server
+  //Setup storage and start server
   colors.setStorage(colorArray);
   server.begin();
 }
 
 void loop() {
+
+  //Retrieve JSON String if there is any
   String input = readInput();
+
+  //If String received print ad interpret it
   if(input.length() > 0) {
     Serial.println(input);
     interpretJson(&input);
   }
+
+  //Update the displayed color
   updateColor();
 }

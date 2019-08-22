@@ -10,24 +10,24 @@ Example JSON Command
 	"command":
 	{
 		"mode":"m",
-		"secondsToNextColor":12,
+		"secondsToNextColor":2,
 		"groupId":1,
 		"colors":
 		[
 			{
 				"red":255,
-				"blue":0,
-				"green":0
+				"green":0,
+				"blue":0
 			},
 			{
 				"red":0,
-				"blue":255,
-				"green":0
+				"green":255,
+				"blue":0
 			},
 			{
 				"red":0,
-				"blue":0,
-				"green":255
+				"green":0,
+				"blue":255
 			}
 		]
 	}
