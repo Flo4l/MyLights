@@ -192,12 +192,14 @@ String readInput() {
 }
 
 //Sends a POST request to the Server for registering or updating the ip
-void registerAtServer() {
+boolean registerAtServer() {
   String url = "http://" + serverAddress + "/stripe/register";
   String params = "ip=" + WiFi.localIP().toString() + String("&mac=") + String(WiFi.macAddress());
   http.begin(url);
   http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-  http.POST(params);
+  int httpCode = http.POST(params);
+  http.end();
+  return httpCode == 200;
 }
 
 void setup() {
@@ -225,7 +227,15 @@ void setup() {
   Serial.println(WiFi.localIP());
   Serial.println("");
 
-  registerAtServer();
+  //Connect to server
+  Serial.print("Connecting to server: ");
+  Serial.println(serverAddress);
+  while(!registerAtServer()) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("Server connected.");
+  Serial.println("");
 
   //Setup storage and start server
   colors.setStorage(colorArray);
