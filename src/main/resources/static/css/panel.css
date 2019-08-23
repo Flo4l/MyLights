@@ -1,0 +1,48 @@
+* {
+    color: white;
+}
+
+html {
+    background: black;
+}
+
+.row {
+    margin: 0;
+}
+
+.pane-main {
+    background-color: #1b1e21;
+    border-radius: 15px;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+}
+
+.pane-options {
+    background-color: #4e555b;
+    border: solid black 2px;
+}
+
+.pane-duration {
+    border: solid black 2px;
+}
+
+.pane-mode {
+    border: solid black 2px;
+}
+
+.list-vertical {
+    background-color: #4e555b;
+    border: solid black 2px;
+}
+
+.list-horizontal {
+    background-color: #4e555b;
+    border: solid black 2px;
+}
+
+.button-ok {
+    background-color: #28a745;
+    border: solid black 2px;
+    width: min-content;
+}
