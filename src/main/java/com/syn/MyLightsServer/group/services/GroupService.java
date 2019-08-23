@@ -7,6 +7,8 @@ import com.syn.MyLightsServer.group.persistence.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GroupService {
 
@@ -25,7 +27,7 @@ public class GroupService {
 		try {
 			Group group = new Group(groupName);
 			checkGroupName(group);
-			checkGroupAlredyExisting(group);
+			checkGroupAlreadyExisting(group);
 			groupRepository.save(group);
 		} catch (Exception e) {
 
@@ -42,7 +44,7 @@ public class GroupService {
 			Group group = new Group(groupName);
 			group.setId(groupId);
 			checkGroupName(group);
-			checkGroupAlredyExisting(group);
+			checkGroupAlreadyExisting(group);
 			groupRepository.save(group);
 		} catch (Exception e) {
 
@@ -55,9 +57,26 @@ public class GroupService {
 		}
 	}
 
-	private void checkGroupAlredyExisting(Group group) throws GroupAlreadyExistingException {
+	private void checkGroupAlreadyExisting(Group group) throws GroupAlreadyExistingException {
 		if (groupRepository.findByGroupName(group.getGroupName()) != null) {
 			throw new GroupAlreadyExistingException();
 		}
+	}
+
+	public String getAllGroupsAsJSON() {
+		String json = "\"groups\":[";
+		List<Group> groups = getAllGroups();
+		for (Group g : groups) {
+			json += g.toJSON();
+			if (groups.indexOf(g) < groups.size() - 1) {
+				json += ",";
+			}
+		}
+		json += "]";
+		return json;
+	}
+
+	public List<Group> getAllGroups() {
+		return groupRepository.findAll();
 	}
 }

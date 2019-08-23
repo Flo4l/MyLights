@@ -1,10 +1,46 @@
 # MyLightsServer
-Server for MyLights Project
+### Server for MyLights Project
 
-ER Diagram
+##### ER Diagram
 ![DB Architecture](db/architektur.png)
 
-Example JSON Command
+##### API
+```
+GET
+/
+/h2-console
+
+
+POST
+/group/create
+    -   groupName
+/group/update
+    -   groupId
+    -   groupName
+/group/delete
+    -   groupId
+/group/get/all
+
+/command/set
+    -   jsonData
+/command/get/all
+/command/get/group
+    -   groupId
+
+/stripe/register
+    -   ip
+    -   mac
+/stripe/get/all
+/stripe/set/group
+    -   stripeId
+    -   groupId
+/stripe/get/group
+    -   groupId
+/stripe/get/unassigned
+```
+
+
+##### Example JSON Command
 ````json
 {
 	"command":

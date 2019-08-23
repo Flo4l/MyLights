@@ -38,4 +38,12 @@ public class Group {
 		this.groupName = groupName;
 	}
 
+	public String toJSON() {
+		String json = "{";
+		json += "\"groupId\":" + id + ",";
+		json += "\"groupName\":\"" + groupName + "\"";
+		json += "}";
+		return json;
+	}
+
 }
