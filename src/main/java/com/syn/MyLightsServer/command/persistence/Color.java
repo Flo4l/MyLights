@@ -51,4 +51,13 @@ public class Color implements Serializable {
 	public void setBlue(int blue) {
 		this.blue = blue;
 	}
+
+	public String toJSON() {
+		String json = "{";
+		json += "{\"red\":" + red + ",";
+		json += "\"green\":" + green + ",";
+		json += "\"blue\":" + blue;
+		json += "}";
+		return json;
+	}
 }

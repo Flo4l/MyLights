@@ -1,7 +1,6 @@
 package com.syn.MyLightsServer.command.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -96,22 +95,20 @@ public class Command {
 	}
 
 	public String toJSON() {
-		String json = "{\"command\":{";
+		String json = "{";
 		json += "\"mode\":\"" + mode + "\",";
 		json += "\"secondsToNextColor\":" + secondsToNextColor + ",";
 		json += "\"groupId\":" + group.getId() + ",";
 		json += "\"colors\":[";
 
 		for (Color c : colors) {
-			json += "{\"red\":" + c.getRed() + ",";
-			json += "\"green\":" + c.getGreen() + ",";
-			json += "\"blue\":" + c.getBlue() + "}";
+			json += c.toJSON();
 			if (colors.indexOf(c) < colors.size() - 1) {
 				json += ",";
 			}
 		}
 
-		json += "]}}";
+		json += "]}";
 		return json;
 	}
 }

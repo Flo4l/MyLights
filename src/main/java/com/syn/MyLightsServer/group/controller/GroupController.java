@@ -37,10 +37,9 @@ public class GroupController {
 		return "";
 	}
 
-	@PostMapping("/get")
+	@PostMapping("/get/all")
 	@ResponseBody
 	public String get() {
-		//TODO send all groups as JSON
-		return "";
+		return "{" + groupService.getAllGroupsAsJSON() + "}";
 	}
 }

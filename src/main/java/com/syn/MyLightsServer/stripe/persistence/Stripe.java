@@ -1,7 +1,6 @@
 package com.syn.MyLightsServer.stripe.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -67,6 +66,20 @@ public class Stripe {
 
 	public void setGroup(Group group) {
 		this.group = group;
+	}
+
+	public String toJSON() {
+		String json = "{";
+		json += "\"stripeId\":" + id + ",";
+		json += "\"stripeName\":\"" + name + "\",";
+		json += "\"group\":";
+		if (group != null) {
+			json += group.toJSON();
+		} else {
+			json = "null";
+		}
+		json += "}";
+		return json;
 	}
 
 }
