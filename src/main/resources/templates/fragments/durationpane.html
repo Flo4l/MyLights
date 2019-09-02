@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="durationpane"
+     class="container
+            pane-duration
+            mb-1">
+    <div class="box">
+        <h3>Dauer</h3>
+    </div>
+    <!--Sekunden-->
+    <div class="box
+                pb-1">
+        <div class="row">
+            <h6 class="container">Sekunden</h6>
+        </div>
+        <div class="row">
+            <div class="col-1
+                        offset-3
+                        box"
+                 onclick="decrementSecs()">
+                <img src="/img/arrow-left.svg">
+            </div>
+            <div class="col-4">
+                <input id="seconds"
+                       type="number"
+                       min="0"
+                       max="60"
+                       step="1"
+                       value="0"
+                       onchange="fetchValues()"/>
+            </div>
+            <div class="col-1
+                        box"
+                 onclick="incrementSecs()">
+                <img src="/img/arrow-right.svg">
+            </div>
+        </div>
+    </div>
+
+    <!--Minuten-->
+    <div class="box
+                pb-1">
+        <div class="row">
+            <h6 class="container">Minuten</h6>
+        </div>
+        <div class="row">
+            <div class="col-1
+                        offset-3
+                        box"
+                 onclick="decrementMins()">
+                <img src="/img/arrow-left.svg">
+            </div>
+            <div class="col-4">
+                <input id="minutes"
+                       type="number"
+                       min="0"
+                       max="60"
+                       step="1"
+                       value="0"/>
+            </div>
+            <div class="col-1
+                        box"
+                 onclick="incrementMins()">
+                <img src="/img/arrow-right.svg">
+            </div>
+        </div>
+    </div>
+
+    <!--Stunden-->
+    <div class="box
+                pb-1">
+        <div class="row">
+            <h6 class="container">Stunden</h6>
+        </div>
+        <div class="row">
+            <div class="col-1
+                        offset-3
+                        box"
+                 onclick="decrementHours()">
+                <img src="/img/arrow-left.svg">
+            </div>
+            <div class="col-4">
+                <input id="hours"
+                       type="number"
+                       min="0"
+                       max="24"
+                       step="1"
+                       value="0"/>
+            </div>
+            <div class="col-1
+                        box"
+                 onclick="incrementHours()">
+                <img src="/img/arrow-right.svg">
+            </div>
+        </div>
+    </div>
+
+    <!--Tage-->
+    <div class="box
+                pb-1">
+        <div class="row">
+            <h6 class="container">Tage</h6>
+        </div>
+        <div class="row">
+            <div class="col-1
+                        offset-3
+                        box"
+                 onclick="decrementDays()">
+                <img src="/img/arrow-left.svg">
+            </div>
+            <div class="col-4">
+                <input id="days"
+                       type="number"
+                       min="0"
+                       max="356"
+                       step="1"
+                       value="0"/>
+            </div>
+            <div class="col-1
+                        box"
+                 onclick="incrementDays()">
+                <img src="/img/arrow-right.svg">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+
+<div th:fragment="options"
+     id="options"
+     class="row
+            container
+            pane-options
+            mb-1
+            p-3
+            pr-0">
+    <div class="col-7"
+         id="color-picker-container">
+    </div>
+    <div class="col-5">
+        <div th:replace="~{fragments/durationpane.html :: durationpane}"></div>
+        <div th:replace="~{fragments/modepane.html :: modepane}"></div>
+    </div>
+</div>
+
+</body>
+</html>

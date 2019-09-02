@@ -1,9 +1,24 @@
 * {
     color: white;
+    text-align: center;
 }
 
 html {
     background: black;
+}
+
+img {
+    width: 100%;
+}
+
+input[type=number] {
+    background-color: black;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    margin: 0;
+    width: 100%;
+    border: solid gray 1px;
+    font-size: large;
 }
 
 .row {
@@ -25,6 +40,7 @@ html {
 
 .pane-duration {
     border: solid black 2px;
+    padding: 0;
 }
 
 .pane-mode {
@@ -44,5 +60,58 @@ html {
 .button-ok {
     background-color: #28a745;
     border: solid black 2px;
-    width: min-content;
+    width: 10%;
+}
+
+.box {
+    border: solid black 2px;
+    padding: 0;
+}
+
+.custom-checkbox {
+    min-height: 1rem;
+    padding-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+}
+.custom-checkbox .custom-control-indicator {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 10px;
+    background-color: #818181;
+    border-radius: 15px;
+    margin-right: 10px;
+    -webkit-transition: background .3s ease;
+    transition: background .3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+    box-shadow: none;
+}
+.custom-checkbox .custom-control-indicator:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #f1f1f1;
+    border-radius: 21px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+    left: -2px;
+    top: -4px;
+    -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
+    background-color: #0e8b00;
+    background-image: none;
+    box-shadow: none !important;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-indicator:after {
+    background-color: #0ead00;
+    left: 15px;
+}
+.custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
+    box-shadow: none !important;
 }
