@@ -7,9 +7,17 @@
     <div th:fragment="colorlist">
         <div id="colorlist"
              class="container
+                    row
                     list-horizontal
-                    mb-2">
-            colorlist
+                    mb-2
+                    p-0">
+             <div id="addColor"
+                  class="box
+                         p-2
+                         col-1"
+                  onclick="addColor()">
+                  <img src="/img/add.svg">
+             </div>
         </div>
     </div>
 </body>

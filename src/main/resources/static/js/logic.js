@@ -5,6 +5,92 @@ var colorPickerWidth = $("#color-picker-container").width();
 var colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: colorPickerWidth
 });
+
+colorPicker.on("color:change", updateColor);
+//==============================================
+
+
+//Color List
+//==============================================
+var colorList = $("#colorlist");
+var colorAdder = $("#addColor");
+
+var activeColor = 0;
+var colors = [];
+
+function addColor() {
+    var hex = colorPicker.color.hexString;
+    var rgb  = colorPicker.color.rgb;
+    var color = getHTMLColor(hex);
+    colorAdder.before(color);
+    colors.push({"red":rgb.r, "green":rgb.g, "blue":rgb.b});
+    setActiveIndex($(".color").length - 1);
+
+}
+
+function addColorFromJSON(JSONColor) {
+    var rgbColor = "rgb(" + JSONColor.red + ", " +
+                            JSONColor.green + ", " +
+                            JSONColor.blue + ")";
+    var color = getHTMLColor(rgbColor);
+    colorAdder.before(color);
+    colors.push({"red":JSONColor.red,
+                 "green":JSONColor.green,
+                 "blue":JSONColor.blue});
+    setActiveIndex($(".color").length - 1);
+}
+
+function removeColor(color) {
+    var c = $(color).parent();
+    colors.splice(c.attr("data-id"), 1);
+    color.parentNode.remove();
+    updateColorIds();
+}
+
+function updateColor() {
+    var rgb  = colorPicker.color.rgb;
+    $(".color[data-id=" + activeColor + "]")
+        .css("background-color", colorPicker.color.hexString);
+    colors[activeColor] = {"red":rgb.r, "green":rgb.g, "blue":rgb.b};
+}
+
+function setActive(color) {
+    var c = $(color);
+    setActiveIndex(c.attr("data-id"));
+}
+
+function setActiveIndex(colorIndex) {
+    activeColor = colorIndex;
+    var c = $(".color[data-id=" + activeColor + "]");
+    colorPicker.color.rgbString = c.css("background-color");
+    $(".color").removeClass("color-highlight");
+    c.addClass("color-highlight");
+}
+
+function updateColorIds() {
+    $(".color").each(function(index, val) {
+        $(val).attr("data-id", index);
+    });
+}
+
+function getHTMLColor(colorString) {
+    var id = $(".color").length;
+    return "<div class=\"color\n" +
+        "                box" +
+        "                col-1\"\n" +
+        "        data-id=\"" + id + "\"\n" +
+        "        style=\"background-color: " + colorString + "\"\n" +
+        "        onclick=\"setActive(this)\">\n" +
+        "       <div class=\"remove\n" +
+        "                    mt-1\n" +
+        "                    p-0\"\n" +
+        "            onclick=\"removeColor(this)\">\n" +
+        "           <img src=\"/img/remove.svg\">\n" +
+        "       </div>\n" +
+        "   </div>";
+}
+
+addColorFromJSON({"red": 255, "green": 0, "blue": 0});
 //==============================================
 
 

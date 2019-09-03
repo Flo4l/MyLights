@@ -55,6 +55,9 @@ input[type=number] {
 .list-horizontal {
     background-color: #4e555b;
     border: solid black 2px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .button-ok {
@@ -114,4 +117,35 @@ input[type=number] {
 }
 .custom-checkbox .custom-control-input:focus ~ .custom-control-indicator {
     box-shadow: none !important;
+}
+
+.box img {
+    width: 80%;
+    height: 80%;
+}
+
+#addColor {
+    width: 9%;
+    margin: 5px;
+    background-color: #3d4349;
+    display: inline-block;
+    float: none;
+}
+
+.color {
+    margin: 5px;
+    display: inline-block;
+    float: none;
+}
+
+.remove {
+    height: 30%;
+    width: 30%;
+    display: flex;
+    float: right;
+    align-content: flex-end;
+}
+
+.color-highlight {
+    box-shadow: 0 0 5px 2px #007bff;
 }
