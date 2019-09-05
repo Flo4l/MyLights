@@ -1,6 +1,8 @@
 package com.syn.MyLightsServer.command.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -28,11 +30,12 @@ public class Command {
 
 	@NotNull
 	@Min(1)
-	@Max(1200)
+	@Max(30758400)
 	private int secondsToNextColor;
 
 	@NotNull
 	@OneToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Group group;
 
 	@NotNull
@@ -43,7 +46,7 @@ public class Command {
 	}
 
 	public Command(
-			@NotNull @Min(1) @Max(1200) int secondsToNextColor,
+			@NotNull @Min(1) @Max(30758400) int secondsToNextColor,
 			@NotNull char mode,
 			@NotNull Group group,
 			@NotNull ArrayList<Color> colors) {
