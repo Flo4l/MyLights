@@ -54,7 +54,7 @@ public class Color implements Serializable {
 
 	public String toJSON() {
 		String json = "{";
-		json += "{\"red\":" + red + ",";
+		json += "\"red\":" + red + ",";
 		json += "\"green\":" + green + ",";
 		json += "\"blue\":" + blue;
 		json += "}";
