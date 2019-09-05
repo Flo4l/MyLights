@@ -6,7 +6,7 @@ var colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: colorPickerWidth
 });
 
-colorPicker.on("color:change", updateColor);
+colorPicker.on("color:change", updateSelectedColor);
 //==============================================
 
 
@@ -25,7 +25,6 @@ function addColor() {
     colorAdder.before(color);
     colors.push({"red":rgb.r, "green":rgb.g, "blue":rgb.b});
     setActiveIndex($(".color").length - 1);
-
 }
 
 function addColorFromJSON(JSONColor) {
@@ -34,29 +33,40 @@ function addColorFromJSON(JSONColor) {
                             JSONColor.blue + ")";
     var color = getHTMLColor(rgbColor);
     colorAdder.before(color);
-    colors.push({"red":JSONColor.red,
-                 "green":JSONColor.green,
-                 "blue":JSONColor.blue});
     setActiveIndex($(".color").length - 1);
 }
 
 function removeColor(color) {
     var c = $(color).parent();
-    colors.splice(c.attr("data-id"), 1);
+    c.addClass("deleted");
+    if(activeColor === colors.length - 1) {
+        setActiveIndex(activeColor - 1);
+    }
+    colors.splice(parseInt(c.attr("data-id")), 1);
     color.parentNode.remove();
     updateColorIds();
 }
 
-function updateColor() {
+function updateSelectedColor() {
     var rgb  = colorPicker.color.rgb;
     $(".color[data-id=" + activeColor + "]")
         .css("background-color", colorPicker.color.hexString);
     colors[activeColor] = {"red":rgb.r, "green":rgb.g, "blue":rgb.b};
 }
 
+function updateUIColorList() {
+    clearColorList();
+    colors.forEach(function(val) {
+       addColorFromJSON(val);
+    });
+    setActiveIndex(0);
+}
+
 function setActive(color) {
     var c = $(color);
-    setActiveIndex(c.attr("data-id"));
+    if(!c.hasClass("deleted")) {
+        setActiveIndex(parseInt(c.attr("data-id")));
+    }
 }
 
 function setActiveIndex(colorIndex) {
@@ -93,8 +103,6 @@ function getHTMLColor(colorString) {
         "       </div>\n" +
         "   </div>";
 }
-
-addColorFromJSON({"red": 255, "green": 0, "blue": 0});
 //==============================================
 
 
@@ -253,12 +261,20 @@ var modules = [];
 //==============================================
 var selectedGroup = 0;
 var groups = [];
-var commands = [];
+var command = [];
+
+function loadGroupValues() {
+    modules = fetchModulesByGroup(groups[selectedGroup].groupId);
+    command = fetchCommandByGroup(groups[selectedGroup].groupId);
+    setDurationWithSeconds(command.secondsToNextColor);
+    colors = command.colors;
+    updateUIColorList();
+}
 //==============================================
+
 
 //Initialising panel
 //==============================================
 groups = fetchAllGroups();
-commands = fetchAllCommands();
-modules = fetchAllModules();
+loadGroupValues();
 //==============================================

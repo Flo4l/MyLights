@@ -93,7 +93,7 @@ public class SetCommandService {
 
 	private void checkValidInterval(Command command) throws InvalidColorIntervalException {
 		if (command.getSecondsToNextColor() < 1
-				|| command.getSecondsToNextColor() > 1200) {
+				|| command.getSecondsToNextColor() > 30758400) {
 			throw new InvalidColorIntervalException();
 		}
 	}

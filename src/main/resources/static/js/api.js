@@ -175,7 +175,7 @@ function fetchCommandByGroup(groupId) {
         },
         async: false,
         success: function(data) {
-            commands = JSON.parse(data).commands;
+            commands = JSON.parse(data).command;
         }
     });
     return commands;

@@ -1,6 +1,8 @@
 package com.syn.MyLightsServer.stripe.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,6 +25,7 @@ public class Stripe {
 	private String name;
 
 	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.DETACH)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	private Group group;
 
 	public Stripe() {
