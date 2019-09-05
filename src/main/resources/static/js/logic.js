@@ -73,6 +73,10 @@ function updateColorIds() {
     });
 }
 
+function clearColorList() {
+    $(".color").remove();
+}
+
 function getHTMLColor(colorString) {
     var id = $(".color").length;
     return "<div class=\"color\n" +
@@ -138,10 +142,10 @@ function setDurationWithSeconds(secs) {
 }
 
 function fetchValues() {
-    seconds = inputSeconds.val();
-    minutes = inputMinutes.val();
-    hours = inputHours.val();
-    days = inputDays.val();
+    seconds = parseInt(inputSeconds.val());
+    minutes = parseInt(inputMinutes.val());
+    hours = parseInt(inputHours.val());
+    days = parseInt(inputDays.val());
 }
 
 function getTotalSeconds() {
@@ -152,7 +156,12 @@ function getTotalSeconds() {
 }
 
 function updateDuration() {
-    setDurationWithSeconds(getTotalSeconds());
+    if(getTotalSeconds() <= 0) {
+        setDurationWithSeconds(1);
+    }
+    else {
+        setDurationWithSeconds(getTotalSeconds());
+    }
 }
 
 function incrementSecs() {
@@ -197,9 +206,59 @@ function incrementDays() {
 }
 
 function decrementDays() {
-    if(getTotalSeconds() / (60 * 60 * 24) > 0) {
+    if(getTotalSeconds() / (60 * 60 * 24) >= 1) {
         days --;
         updateDuration()
     }
 }
+
+setDurationWithSeconds(1);
+//==============================================
+
+
+//Accept
+//==============================================
+var acceptButton = $(".button-ok");
+
+function executeCommand() {
+    sendCommand(
+        JSON.stringify(
+            generateJSONCommand()));
+}
+
+function generateJSONCommand() {
+    var mode = ($(".color").length < 2) ? 's' :
+        isFading ? 'f' : 'm';
+    var groupId = 1;
+    return {
+        "command":
+        {
+            "mode": mode,
+            "secondsToNextColor": getTotalSeconds(),
+            "groupId": groupId,
+            "colors": colors
+        }
+    }
+}
+//==============================================
+
+
+//Module list
+//==============================================
+var modules = [];
+//==============================================
+
+
+//Group list
+//==============================================
+var selectedGroup = 0;
+var groups = [];
+var commands = [];
+//==============================================
+
+//Initialising panel
+//==============================================
+groups = fetchAllGroups();
+commands = fetchAllCommands();
+modules = fetchAllModules();
 //==============================================
