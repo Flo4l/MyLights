@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <div th:fragment="onlay"
+         id="groupNameOnlay"
+         class="onlay
+                row
+                p-5">
+        <div class="onlay-panel
+                    container
+                    col-6
+                    offset-3
+                    p-4">
+            <h1 class="mb-4">
+                Neue Gruppe
+            </h1>
+            <h5 class="mb-5">
+                Bitte geben Sie einen Namen für die Gruppe ein:
+            </h5>
+            <input id="inputGroupName"
+                   class="mb-4"
+                   type="text"
+                   maxlength="15">
+            <div class="row">
+                <div class="button-ok
+                            col-1
+                            offset-5
+                            pt-2
+                            mr-2"
+                     onclick="createGroup()">
+                    <img src="/img/accept.svg">
+                </div>
+                <div class="button-decline
+                            col-1
+                            pt-2
+                            ml-2"
+                     onclick="closeOnlays()">
+                    <img src="/img/remove.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

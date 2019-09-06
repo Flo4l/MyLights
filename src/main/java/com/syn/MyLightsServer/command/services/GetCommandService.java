@@ -43,6 +43,9 @@ public class GetCommandService {
 
 	public String getCommandByGroupAsJSON(int groupId) {
 		Command command = getCommandByGroup(groupId);
+		if(command == null) {
+			return "";
+		}
 		String json = "\"command\":" + command.toJSON();
 		return json;
 	}

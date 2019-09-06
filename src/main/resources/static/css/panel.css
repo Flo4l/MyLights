@@ -50,20 +50,37 @@ input[type=number] {
 .list-vertical {
     background-color: #4e555b;
     border: solid black 2px;
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .list-horizontal {
     background-color: #4e555b;
     border: solid black 2px;
-    white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
+    white-space: nowrap;
+    display: flex;
+    justify-content: start;
 }
 
 .button-ok {
     background-color: #28a745;
     border: solid black 2px;
     width: 10%;
+}
+
+.button-decline {
+    background-color: #a70001;
+    border: solid black 2px;
+    width: 10%;
+    padding: 5px;
+}
+
+.button-decline img {
+    width: 80%;
+    height: 60%;
 }
 
 .box {
@@ -138,7 +155,7 @@ input[type=number] {
     float: none;
 }
 
-.remove {
+.color-remove {
     height: 30%;
     width: 30%;
     display: flex;
@@ -148,4 +165,58 @@ input[type=number] {
 
 .color-highlight {
     box-shadow: 0 0 5px 2px #007bff;
+}
+
+.group {
+    background-color: #007bff;
+    margin: 5px;
+}
+
+.group-name {
+    font-size: 20px;
+}
+
+.group-remove {
+    background-color: red;
+    width: 80%;
+    height: 50%;
+    float: right;
+}
+
+.group-rename {
+    background-color: green;
+    width: 80%;
+    height: 50%;
+    float: right;
+}
+
+.group-highlight {
+    background-color: #6f42c1;
+}
+
+#addGroup {
+    background-color: #007bff;
+    margin: 5px;
+}
+
+.onlay {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.86);
+}
+
+.onlay-panel {
+    background-color: #4e4e4e;
+    box-shadow: 0 0 2px 1px rgb(0, 0, 0);
+    border-radius: 3px;
+    height: 50%;
+    margin: auto;
+}
+
+#inputGroupName {
+    border: solid black 2px;
+    color: black;
+    font-size: 20px;
 }
