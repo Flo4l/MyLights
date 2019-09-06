@@ -115,6 +115,11 @@ var isFading = false;
 function fadingToggled() {
     isFading = togglerFadeing.prop("checked");
 }
+
+function setIsFading(boolean) {
+    isFading = boolean;
+    togglerFadeing.prop("checked", boolean);
+}
 //==============================================
 
 
@@ -235,8 +240,7 @@ function executeCommand() {
 }
 
 function generateJSONCommand() {
-    var mode = ($(".color").length < 2) ? 's' :
-        isFading ? 'f' : 'm';
+    var mode = isFading ? 'f' : ($(".color").length < 2) ? 's' : 'm';
     return {
         "command":
         {
@@ -272,6 +276,7 @@ function loadGroupValues() {
         addColor();
     } else {
         setDurationWithSeconds(command.secondsToNextColor);
+        setIsFading(command.mode == "f");
         colors = command.colors;
     }
     updateUIColorList();
@@ -309,6 +314,34 @@ function addGroupFromJSON(JSONGroup) {
     setActiveGroupIndex($(".group").length - 1);
 }
 
+function createGroup() {
+    var groupName = overlayInput.val();
+    closeOverlay();
+    if(sendCreateGroup(groupName)) {
+        groups = fetchAllGroups();
+        updateUIGroupList();
+        setActiveGroupIndex($(".group").length - 1);
+    } else {
+        showErrorOverlay();
+    }
+}
+
+function deleteGroup() {
+    closeOverlay();
+    if(sendDeleteGroup(groups[activeGroup].groupId)) {
+        groups = fetchAllGroups();
+        updateUIGroupList();
+        if(activeGroup >= $(".group").length) {
+            setActiveGroupIndex($(".group").length - 1);
+        }
+        else {
+            setActiveGroupIndex(activeGroup);
+        }
+    } else {
+        showErrorOverlay();
+    }
+}
+
 function getHTMLGroup(groupName) {
     var id = $(".group").length;
     return "<div data-id=\"" + id + "\"\n" +
@@ -327,7 +360,7 @@ function getHTMLGroup(groupName) {
         "            <div class=\"box\n" +
         "                        group-remove\n" +
         "                        pb-2\"\n" +
-        "                 onclick=\"\">\n" +
+        "                 onclick=\"showDeleteGroupOverlay(this)\">\n" +
         "                <img src=\"/img/remove.svg\">\n" +
         "            </div>\n" +
         "            <div class=\"box\n" +
@@ -343,44 +376,8 @@ function getHTMLGroup(groupName) {
 //==============================================
 
 
-//Onlay Panels
+//Initialising panel data
 //==============================================
-var groupNameOnlay = $("#groupNameOnlay");
-
-function closeOnlays() {
-    $(".onlay").hide();
-    $(":input[type=text]").val("");
-}
-
-function showGroupCreationOnlay() {
-    groupNameOnlay.show();
-}
-
-function createGroup() {
-    var groupName = $("#inputGroupName").val();
-    closeOnlays();
-    if(sendCreateGroup(groupName)) {
-        groups = fetchAllGroups();
-        updateUIGroupList();
-        setActiveGroupIndex($(".group").length);
-    } else {
-        //TODO show error
-    }
-}
-//==============================================
-
-
-function initListSizes() {
-    var verticals = $(".list-vertical");
-    var horizontals = $(".list-horizontal");
-    verticals.css("max-height", verticals.height());
-    horizontals.css("max-width", horizontals.width());
-}
-
-//Initialising panel
-//==============================================
-closeOnlays();
-initListSizes();
 groups = fetchAllGroups();
 updateUIGroupList();
 loadGroupValues();
