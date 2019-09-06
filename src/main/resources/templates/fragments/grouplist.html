@@ -7,11 +7,20 @@
 
 <div th:fragment="grouplist"
      id="grouplist"
-     class="container
-            list-vertical
+     class="list-vertical
             col-2
-            m-3">
-    grouplist
+            m-3
+            p-0">
+    <div id="addGroup"
+         class="box
+                row"
+         onclick="showGroupCreationOnlay()">
+        <div class="col-6
+                    offset-3
+                    pt-2">
+            <img src="/img/add.svg">
+        </div>
+    </div>
 </div>
 
 </body>

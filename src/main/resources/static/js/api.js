@@ -17,7 +17,7 @@ function sendCommand(JSONCommandString) {
     return success;
 }
 
-function createGroup(groupName) {
+function sendCreateGroup(groupName) {
     var url = "http://" + window.location.hostname + "/group/create";
     var success = false;
     $.ajax({
@@ -34,7 +34,7 @@ function createGroup(groupName) {
     return success;
 }
 
-function updateGroup(groupId, newGroupName) {
+function sendUpdateGroup(groupId, newGroupName) {
     var url = "http://" + window.location.hostname + "/group/update";
     var success = false;
     $.ajax({
@@ -52,7 +52,7 @@ function updateGroup(groupId, newGroupName) {
     return success;
 }
 
-function deleteGroup(groupId) {
+function sendDeleteGroup(groupId) {
     var url = "http://" + window.location.hostname + "/group/delete";
     var success = false;
     $.ajax({
@@ -69,7 +69,7 @@ function deleteGroup(groupId) {
     return success;
 }
 
-function assignModule(moduleId, groupId) {
+function sendAssignModule(moduleId, groupId) {
     var url = "http://" + window.location.hostname + "/stripe/set/group";
     var success = false;
     $.ajax({
@@ -166,7 +166,7 @@ function fetchAllCommands() {
 
 function fetchCommandByGroup(groupId) {
     var url = "http://" + window.location.hostname + "/command/get/group";
-    var commands = [];
+    var command = null;
     $.ajax({
         url: url,
         type: "POST",
@@ -175,9 +175,9 @@ function fetchCommandByGroup(groupId) {
         },
         async: false,
         success: function(data) {
-            commands = JSON.parse(data).command;
+            command = JSON.parse(data).command;
         }
     });
-    return commands;
+    return command;
 }
 //==============================================

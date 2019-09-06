@@ -24,7 +24,7 @@ function addColor() {
     var color = getHTMLColor(hex);
     colorAdder.before(color);
     colors.push({"red":rgb.r, "green":rgb.g, "blue":rgb.b});
-    setActiveIndex($(".color").length - 1);
+    setActiveColorIndex($(".color").length - 1);
 }
 
 function addColorFromJSON(JSONColor) {
@@ -33,14 +33,14 @@ function addColorFromJSON(JSONColor) {
                             JSONColor.blue + ")";
     var color = getHTMLColor(rgbColor);
     colorAdder.before(color);
-    setActiveIndex($(".color").length - 1);
+    setActiveColorIndex($(".color").length - 1);
 }
 
 function removeColor(color) {
     var c = $(color).parent();
     c.addClass("deleted");
     if(activeColor === colors.length - 1) {
-        setActiveIndex(activeColor - 1);
+        setActiveColorIndex(activeColor - 1);
     }
     colors.splice(parseInt(c.attr("data-id")), 1);
     color.parentNode.remove();
@@ -59,17 +59,17 @@ function updateUIColorList() {
     colors.forEach(function(val) {
        addColorFromJSON(val);
     });
-    setActiveIndex(0);
+    setActiveColorIndex(0);
 }
 
-function setActive(color) {
+function setActiveColor(color) {
     var c = $(color);
     if(!c.hasClass("deleted")) {
-        setActiveIndex(parseInt(c.attr("data-id")));
+        setActiveColorIndex(parseInt(c.attr("data-id")));
     }
 }
 
-function setActiveIndex(colorIndex) {
+function setActiveColorIndex(colorIndex) {
     activeColor = colorIndex;
     var c = $(".color[data-id=" + activeColor + "]");
     colorPicker.color.rgbString = c.css("background-color");
@@ -94,8 +94,8 @@ function getHTMLColor(colorString) {
         "                col-1\"\n" +
         "        data-id=\"" + id + "\"\n" +
         "        style=\"background-color: " + colorString + "\"\n" +
-        "        onclick=\"setActive(this)\">\n" +
-        "       <div class=\"remove\n" +
+        "        onclick=\"setActiveColor(this)\">\n" +
+        "       <div class=\"color-remove\n" +
         "                    mt-1\n" +
         "                    p-0\"\n" +
         "            onclick=\"removeColor(this)\">\n" +
@@ -237,13 +237,12 @@ function executeCommand() {
 function generateJSONCommand() {
     var mode = ($(".color").length < 2) ? 's' :
         isFading ? 'f' : 'm';
-    var groupId = 1;
     return {
         "command":
         {
             "mode": mode,
             "secondsToNextColor": getTotalSeconds(),
-            "groupId": groupId,
+            "groupId": groups[activeGroup].groupId,
             "colors": colors
         }
     }
@@ -259,22 +258,130 @@ var modules = [];
 
 //Group list
 //==============================================
-var selectedGroup = 0;
+var activeGroup = 0;
 var groups = [];
 var command = [];
 
 function loadGroupValues() {
-    modules = fetchModulesByGroup(groups[selectedGroup].groupId);
-    command = fetchCommandByGroup(groups[selectedGroup].groupId);
-    setDurationWithSeconds(command.secondsToNextColor);
-    colors = command.colors;
+    modules = fetchModulesByGroup(groups[activeGroup].groupId);
+    command = fetchCommandByGroup(groups[activeGroup].groupId);
+    if(command == null) {
+        setDurationWithSeconds(1);
+        clearColorList();
+        colors = [];
+        addColor();
+    } else {
+        setDurationWithSeconds(command.secondsToNextColor);
+        colors = command.colors;
+    }
     updateUIColorList();
+}
+
+function setActiveGroup(group) {
+    if(!$(group).hasClass("deleted")) {
+        setActiveGroupIndex(parseInt($(group).attr("data-id")));
+    }
+}
+
+function setActiveGroupIndex(index) {
+    activeGroup = index;
+    var g = $(".group[data-id=" + activeGroup + "]");
+    $(".group").removeClass("group-highlight");
+    g.addClass("group-highlight");
+    loadGroupValues();
+}
+
+function updateUIGroupList() {
+    clearGroupList();
+    groups.forEach(function(val) {
+        addGroupFromJSON(val);
+    });
+    setActiveGroupIndex(0);
+}
+
+function clearGroupList() {
+    $(".group").remove();
+}
+
+function addGroupFromJSON(JSONGroup) {
+    var group = getHTMLGroup(JSONGroup.groupName);
+    $("#addGroup").before(group);
+    setActiveGroupIndex($(".group").length - 1);
+}
+
+function getHTMLGroup(groupName) {
+    var id = $(".group").length;
+    return "<div data-id=\"" + id + "\"\n" +
+        "         class=\"box\n" +
+        "                group\n" +
+        "                row\"\n" +
+        "         onclick=\"setActiveGroup(this)\">\n" +
+        "        <div class=\"col-10\n" +
+        "                    group-name\n" +
+        "                    p-0\n" +
+        "                    mt-3\">\n" +
+        "                " + groupName + "\n" +
+        "        </div>\n" +
+        "        <div class=\"col-2\n" +
+        "                    p-0\">\n" +
+        "            <div class=\"box\n" +
+        "                        group-remove\n" +
+        "                        pb-2\"\n" +
+        "                 onclick=\"\">\n" +
+        "                <img src=\"/img/remove.svg\">\n" +
+        "            </div>\n" +
+        "            <div class=\"box\n" +
+        "                        group-rename\n" +
+        "                        pb-1\"\n" +
+        "                 onclick=\"\">\n" +
+        "                <img src=\"/img/pencil.svg\">\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "    </div>";
+}
+
+//==============================================
+
+
+//Onlay Panels
+//==============================================
+var groupNameOnlay = $("#groupNameOnlay");
+
+function closeOnlays() {
+    $(".onlay").hide();
+    $(":input[type=text]").val("");
+}
+
+function showGroupCreationOnlay() {
+    groupNameOnlay.show();
+}
+
+function createGroup() {
+    var groupName = $("#inputGroupName").val();
+    closeOnlays();
+    if(sendCreateGroup(groupName)) {
+        groups = fetchAllGroups();
+        updateUIGroupList();
+        setActiveGroupIndex($(".group").length);
+    } else {
+        //TODO show error
+    }
 }
 //==============================================
 
 
+function initListSizes() {
+    var verticals = $(".list-vertical");
+    var horizontals = $(".list-horizontal");
+    verticals.css("max-height", verticals.height());
+    horizontals.css("max-width", horizontals.width());
+}
+
 //Initialising panel
 //==============================================
+closeOnlays();
+initListSizes();
 groups = fetchAllGroups();
+updateUIGroupList();
 loadGroupValues();
 //==============================================
