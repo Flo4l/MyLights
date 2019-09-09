@@ -149,7 +149,7 @@ void interpretJson(String* jsonString) {
   if(err) {
     Serial.println(err.c_str());
   }
-
+  
   //Execute method based on type of JSON Object
   if(doc.containsKey("command")) {
     extractCommand(doc);
@@ -247,7 +247,7 @@ void loop() {
   //Retrieve JSON String if there is any
   String input = readInput();
 
-  //If String received print ad interpret it
+  //If String received print and interpret it
   if(input.length() > 0) {
     Serial.println(input);
     interpretJson(&input);
