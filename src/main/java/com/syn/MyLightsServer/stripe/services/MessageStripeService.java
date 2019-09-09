@@ -29,7 +29,7 @@ public class MessageStripeService {
 	public void sendCommand(Command command) {
 		List<Stripe> targetStripes = stripeRepository.getByGroup(command.getGroup());
 		targetStripes.stream().forEach(s -> {
-			sendMessage(s, command.toJSON());
+			sendMessage(s, "{\"command\":" + command.toJSON() + "}");
 		});
 	}
 
