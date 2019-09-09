@@ -25,10 +25,11 @@
                             col-7
                             m-3">
                     <h1>LOGO</h1>
-                    <h2 class="group-name">Groupname</h2>
+                    <h2 id="group-name-headline">Groupname</h2>
                     <div th:replace="~{fragments/options.html :: options}"></div>
                     <div th:replace="~{fragments/colorlist.html :: colorlist}"></div>
-                    <div class="container
+                    <div id="button-send-command"
+                         class="container
                                 button-ok"
                          onclick="executeCommand()">
                         <img src="/img/accept.svg">

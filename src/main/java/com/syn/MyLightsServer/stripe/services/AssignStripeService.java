@@ -47,6 +47,12 @@ public class AssignStripeService {
 		}
 	}
 
+	public void updateStripeName(int stripeId, String stripeName) {
+		Stripe stripe = stripeRepository.getById(stripeId);
+		stripe.setName(stripeName);
+		stripeRepository.save(stripe);
+	}
+
 	private void checkStripeIp(String ip) {
 		Pattern pattern = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
 		if (!pattern.matcher(ip).matches()) {

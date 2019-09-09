@@ -25,6 +25,48 @@
                     Bitte geben Sie einen Namen für die Gruppe ein:
                 </h5>
             </div>
+            <div id="overlay-updateGroup">
+                <h1 class="overlay-heading
+                           mb-4">
+                    Gruppe umbenennen
+                </h1>
+                <h5 class="overlay-text
+                           mb-4">
+                    Bitte geben Sie einen neuen Namen für die Gruppe ein:
+                </h5>
+                <h5 class="overlay-groupName
+                            mb-3">
+                    Gruppenname
+                </h5>
+            </div>
+            <div id="overlay-updateModule">
+                <h1 class="overlay-heading
+                           mb-4">
+                    Modul umbenennen
+                </h1>
+                <h5 class="overlay-text
+                           mb-4">
+                    Bitte geben Sie einen neuen Namen für das Modul ein:
+                </h5>
+                <h5 class="overlay-moduleName
+                            mb-3">
+                    Gruppenname
+                </h5>
+            </div>
+            <div id="overlay-unassignModule">
+                <h1 class="overlay-heading
+                           mb-4">
+                    Modul entfernen
+                </h1>
+                <h5 class="overlay-text
+                           mb-4">
+                    Wollen Sie das Modul wirklich aus der Gruppe entfernen?
+                </h5>
+                <h5 class="overlay-moduleName
+                            mb-4">
+                    Modulname
+                </h5>
+            </div>
             <div id="overlay-deleteGroup">
                 <h1 class="overlay-heading
                            mb-4">
@@ -48,6 +90,42 @@
                            mb-5">
                     Das hat leider nicht geklappt :(
                 </h5>
+            </div>
+            <div id="overlay-assignModule">
+                <h1 class="overlay-heading
+                           mb-4">
+                    Module zuweisen
+                </h1>
+                <div class="row">
+                    <div th:fragment="modulelist"
+                         id="assign-modulelist"
+                         class="list-vertical
+                                offset-4
+                                col-4
+                                p-0
+                                mb-4">
+                        <div data-id="0"
+                             class="module-unassigned
+                                    row
+                                    box"
+                             onclick="checkModule(this)">
+                            <div class="col-2
+                                        p-1
+                                        ml-2
+                                        mt-2">
+                                <img src="/img/accept.svg"
+                                     data-id="check"
+                                     class="unchecked">
+                            </div>
+                            <div class="module-name
+                                        col-9
+                                        py-3
+                                        px-0">
+                                new module 2
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="overlay-confirmGroup">
                 <div class="row">

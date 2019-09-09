@@ -256,7 +256,140 @@ function generateJSONCommand() {
 
 //Module list
 //==============================================
+var activeModule = 0;
 var modules = [];
+
+function clearModuleList() {
+    $(".module").remove();
+}
+
+function updateModuleList() {
+    modules = fetchModulesByGroup(groups[activeGroup].groupId);
+    clearModuleList();
+    modules.forEach(function(val) {
+       addModuleFromJSON(val);
+    });
+}
+
+function updateModule() {
+    var moduleName = overlayInput.val();
+    var moduleId = modules[activeModule].stripeId;
+    closeOverlay();
+    if(!sendUpdateModule(moduleId, moduleName)) {
+        showErrorOverlay();
+    }
+    updateModuleList();
+}
+
+function unassignModule() {
+    var moduleId = modules[activeModule].stripeId;
+    closeOverlay();
+    if(!sendUnassignModule(moduleId)) {
+        showErrorOverlay();
+    }
+    updateModuleList();
+}
+
+function addModuleFromJSON(JSONModule) {
+    var mod = getHTMLModule(JSONModule.stripeName);
+    $("#addModule").before(mod);
+}
+
+function getHTMLModule(moduleName) {
+    var moduleId = $(".module").length;
+    return "<div data-id=\"" + moduleId + "\"\n" +
+        "         class=\"box\n" +
+        "                module\n" +
+        "                row\">\n" +
+        "        <div class=\"col-10\n" +
+        "                    module-name\n" +
+        "                    p-0\n" +
+        "                    mt-3\">\n" +
+        "            " + moduleName + "\n" +
+        "        </div>\n" +
+        "        <div class=\"col-2\n" +
+        "                    p-0\">\n" +
+        "            <div class=\"box\n" +
+        "                        btn-remove\n" +
+        "                        pb-2\"\n" +
+        "                 onclick=\"showUnassignModuleOverlay(this)\">\n" +
+        "                <img src=\"/img/remove.svg\">\n" +
+        "            </div>\n" +
+        "            <div class=\"box\n" +
+        "                        btn-rename\n" +
+        "                        pb-1\" onclick=\"showUpdateModuleOverlay(this)\">\n" +
+        "                <img src=\"/img/pencil.svg\">\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "    </div>";
+}
+//==============================================
+
+
+//Assign module List
+//==============================================
+var unassignedModules = [];
+
+function clearUnassignedModuleList() {
+    $(".module-unassigned").remove();
+}
+
+function loadUnassignedModules() {
+    unassignedModules = fetchUnassignedModules();
+    clearUnassignedModuleList();
+    unassignedModules.forEach(function(val) {
+       var mod = getHTMLUnassignedModule(val.stripeName);
+       $("#assign-modulelist").append(mod);
+    });
+}
+
+function checkModule(mod) {
+    var check = $(mod).find("[data-id=check]");
+    if(check.hasClass("unchecked")) {
+        check.removeClass("unchecked");
+        check.addClass("checked");
+    } else {
+        check.removeClass("checked");
+        check.addClass("unchecked");
+    }
+}
+
+function assignModules() {
+    closeOverlay();
+    $(".checked").each(function(index, val) {
+        var num = parseInt($(val).parent().parent().attr("data-id"));
+        var moduleId = unassignedModules[num].stripeId;
+        var groupId = groups[activeGroup].groupId;
+        if(!sendAssignModule(moduleId, groupId)) {
+            showErrorOverlay();
+        }
+    });
+    updateModuleList();
+}
+
+function getHTMLUnassignedModule(moduleName) {
+    var moduleId = $(".module-unassigned").length;
+    return "<div data-id=\"" + moduleId + "\"\n" +
+        "        class=\"module-unassigned\n" +
+        "                row\n" +
+        "                box\"\n" +
+        "        onclick=\"checkModule(this)\">\n" +
+        "       <div class=\"col-2\n" +
+        "                    p-1\n" +
+        "                    ml-2\n" +
+        "                    mt-2\">\n" +
+        "           <img src=\"/img/accept.svg\"\n" +
+        "                data-id=\"check\"\n" +
+        "                class=\"unchecked\">\n" +
+        "       </div>\n" +
+        "       <div class=\"module-name\n" +
+        "                    col-9\n" +
+        "                    py-2\n" +
+        "                    px-0\">\n" +
+        "           " + moduleName + "\n" +
+        "       </div>\n" +
+        "   </div>";
+}
 //==============================================
 
 
@@ -267,8 +400,8 @@ var groups = [];
 var command = [];
 
 function loadGroupValues() {
-    modules = fetchModulesByGroup(groups[activeGroup].groupId);
     command = fetchCommandByGroup(groups[activeGroup].groupId);
+    $("#group-name-headline").text(groups[activeGroup].groupName);
     if(command == null) {
         setDurationWithSeconds(1);
         clearColorList();
@@ -279,6 +412,7 @@ function loadGroupValues() {
         setIsFading(command.mode == "f");
         colors = command.colors;
     }
+    updateModuleList();
     updateUIColorList();
 }
 
@@ -326,6 +460,20 @@ function createGroup() {
     }
 }
 
+function updateGroup() {
+    var groupName = overlayInput.val();
+    var groupId = groups[activeGroup].groupId;
+    var active = activeGroup
+    closeOverlay();
+    if(sendUpdateGroup(groupId, groupName)) {
+        groups = fetchAllGroups();
+        updateUIGroupList();
+        setActiveGroupIndex(active);
+    } else {
+        showErrorOverlay();
+    }
+}
+
 function deleteGroup() {
     closeOverlay();
     if(sendDeleteGroup(groups[activeGroup].groupId)) {
@@ -358,21 +506,49 @@ function getHTMLGroup(groupName) {
         "        <div class=\"col-2\n" +
         "                    p-0\">\n" +
         "            <div class=\"box\n" +
-        "                        group-remove\n" +
+        "                        btn-remove\n" +
         "                        pb-2\"\n" +
         "                 onclick=\"showDeleteGroupOverlay(this)\">\n" +
         "                <img src=\"/img/remove.svg\">\n" +
         "            </div>\n" +
         "            <div class=\"box\n" +
-        "                        group-rename\n" +
+        "                        btn-rename\n" +
         "                        pb-1\"\n" +
-        "                 onclick=\"\">\n" +
+        "                 onclick=\"showUpdateGroupOverlay(this)\">\n" +
         "                <img src=\"/img/pencil.svg\">\n" +
         "            </div>\n" +
         "        </div>\n" +
         "    </div>";
 }
 
+//==============================================
+
+
+//JQuery events
+//==============================================
+$(document).keyup(function (e) {
+    //Enter
+    if (e.keyCode === 13) {
+        if(overlay.hidden) {
+            $("#button-send-command").click();
+        } else {
+            overlayOkButtons[0].click();
+        }
+    }
+    //Right
+    if(e.keyCode === 39) {
+        setActiveColorIndex((activeColor + 1) % colors.length);
+    }
+    //Left
+    if(e.keyCode === 37) {
+        var nextColor = (activeColor === 0) ? colors.length - 1 : activeColor - 1;
+        setActiveColorIndex(nextColor);
+    }
+    //Space
+    if(e.keyCode === 32) {
+        colorAdder.click();
+    }
+});
 //==============================================
 
 

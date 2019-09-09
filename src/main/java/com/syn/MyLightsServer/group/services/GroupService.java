@@ -4,19 +4,25 @@ import com.syn.MyLightsServer.group.exceptions.GroupAlreadyExistingException;
 import com.syn.MyLightsServer.group.exceptions.InvalidGroupNameException;
 import com.syn.MyLightsServer.group.persistence.Group;
 import com.syn.MyLightsServer.group.persistence.GroupRepository;
+import com.syn.MyLightsServer.stripe.persistence.Stripe;
+import com.syn.MyLightsServer.stripe.persistence.StripeRepository;
+import com.syn.MyLightsServer.stripe.services.UnassignStripeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class GroupService {
 
 	private final GroupRepository groupRepository;
+	private final UnassignStripeService unassignStripeService;
 
 	@Autowired
-	public GroupService(GroupRepository groupRepository) {
+	public GroupService(GroupRepository groupRepository, UnassignStripeService unassignStripeService) {
 		this.groupRepository = groupRepository;
+		this.unassignStripeService = unassignStripeService;
 	}
 
 	public Group getGroupById(int id) {
@@ -34,8 +40,10 @@ public class GroupService {
 		}
 	}
 
+	@Transactional
 	public void deleteGroup(int groupId) {
 		Group group = groupRepository.findById(groupId);
+		unassignStripeService.unassignStripesFromGroup(group);
 		groupRepository.delete(group);
 	}
 

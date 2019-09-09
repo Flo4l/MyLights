@@ -30,6 +30,11 @@ POST
 /stripe/register
     -   ip
     -   mac
+/stripe/unassign
+    -   stripeId
+/strupe/update
+    -   stripeId
+    -   stripeName
 /stripe/get/all
 /stripe/set/group
     -   stripeId
