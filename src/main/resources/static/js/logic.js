@@ -529,7 +529,7 @@ function getHTMLGroup(groupName) {
 $(document).keyup(function (e) {
     //Enter
     if (e.keyCode === 13) {
-        if(overlay.hidden) {
+        if(overlay.is(":hidden")) {
             $("#button-send-command").click();
         } else {
             overlayOkButtons[0].click();
@@ -537,16 +537,28 @@ $(document).keyup(function (e) {
     }
     //Right
     if(e.keyCode === 39) {
-        setActiveColorIndex((activeColor + 1) % colors.length);
+        if(overlay.is(":hidden")) {
+            setActiveColorIndex((activeColor + 1) % colors.length);
+        }
     }
     //Left
     if(e.keyCode === 37) {
-        var nextColor = (activeColor === 0) ? colors.length - 1 : activeColor - 1;
-        setActiveColorIndex(nextColor);
+        if(overlay.is(":hidden")) {
+            var nextColor = (activeColor === 0) ? colors.length - 1 : activeColor - 1;
+            setActiveColorIndex(nextColor);
+        }
     }
     //Space
     if(e.keyCode === 32) {
-        colorAdder.click();
+        if(overlay.is(":hidden")) {
+            colorAdder.click();
+        }
+    }
+    //Escape
+    if(e.keyCode === 27) {
+        if(overlay.is(":visible")) {
+            overlayDeclineButtons.click();
+        }
     }
 });
 //==============================================

@@ -13,6 +13,7 @@ function initListSizes() {
 //==============================================
 var overlay = $("#overlay");
 var overlayOkButtons = overlay.find(".button-ok");
+var overlayDeclineButtons = overlay.find(".button-decline");
 var overlayInput = $("#overlay-input");
 var overlayNewGroup = $("#overlay-newGroup");
 var overlayUpdateGroup = $("#overlay-updateGroup");
@@ -54,6 +55,7 @@ function showCreateGroupOverlay() {
     overlayNewGroup.show();
     overlayInputGroup.show();
     overlay.show();
+    overlayInput.focus();
 }
 
 function showUpdateGroupOverlay(group) {
@@ -63,6 +65,7 @@ function showUpdateGroupOverlay(group) {
     overlayUpdateGroup.show();
     overlayInputGroup.show();
     overlay.show();
+    overlayInput.focus();
 }
 
 function showDeleteGroupOverlay(group) {
@@ -98,6 +101,7 @@ function showUpdateModuleOverlay(mod) {
     overlayUpdateModuleGroup.show();
     overlayInputGroup.show();
     overlay.show();
+    overlayInput.focus();
 }
 //==============================================
 
