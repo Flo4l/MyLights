@@ -176,14 +176,14 @@ input[type=number] {
     font-size: 20px;
 }
 
-.group-remove {
+.btn-remove {
     background-color: red;
     width: 80%;
     height: 50%;
     float: right;
 }
 
-.group-rename {
+.btn-rename {
     background-color: green;
     width: 80%;
     height: 50%;
@@ -219,4 +219,32 @@ input[type=number] {
     border: solid black 2px;
     color: black;
     font-size: 20px;
+}
+
+#addModule {
+    background-color: #0cb200;
+    margin: 5px;
+}
+
+.module {
+    background-color: #0cb200;
+    margin: 5px;
+}
+
+.module-name {
+    font-size: 20px;
+}
+
+.module-assigned {
+    background-color: #0cb200;
+    margin: 5px;
+}
+
+.module-unassigned {
+    background-color: #a26e85;
+    margin: 5px;
+}
+
+.unchecked {
+    display: none;
 }

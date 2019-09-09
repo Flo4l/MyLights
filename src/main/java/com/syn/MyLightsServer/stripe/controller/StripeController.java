@@ -2,6 +2,7 @@ package com.syn.MyLightsServer.stripe.controller;
 
 import com.syn.MyLightsServer.stripe.services.AssignStripeService;
 import com.syn.MyLightsServer.stripe.services.GetStripeService;
+import com.syn.MyLightsServer.stripe.services.UnassignStripeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,12 @@ public class StripeController {
 
 	private final AssignStripeService assignStripeService;
 	private final GetStripeService getStripeService;
+	private final UnassignStripeService unassignStripeService;
 
-	public StripeController(AssignStripeService assignStripeService, GetStripeService getStripeService) {
+	public StripeController(AssignStripeService assignStripeService, GetStripeService getStripeService, UnassignStripeService unassignStripeService) {
 		this.assignStripeService = assignStripeService;
 		this.getStripeService = getStripeService;
+		this.unassignStripeService = unassignStripeService;
 	}
 
 	@PostMapping("/register")
@@ -30,6 +33,20 @@ public class StripeController {
 	@ResponseBody
 	public String setGroup(int stripeId, int groupId) {
 		assignStripeService.assignStripeToGroup(stripeId, groupId);
+		return "";
+	}
+
+	@PostMapping("/update")
+	@ResponseBody
+	public String update(int stripeId, String stripeName) {
+		assignStripeService.updateStripeName(stripeId, stripeName);
+		return "";
+	}
+
+	@PostMapping("/unassign")
+	@ResponseBody
+	public String update(int stripeId) {
+		unassignStripeService.unassignStripe(stripeId);
 		return "";
 	}
 

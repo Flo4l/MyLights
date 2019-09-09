@@ -24,8 +24,7 @@ public class Stripe {
 	@NotNull
 	private String name;
 
-	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.DETACH)
-	@OnDelete(action = OnDeleteAction.NO_ACTION)
+	@ManyToOne(targetEntity = Group.class, cascade = CascadeType.ALL)
 	private Group group;
 
 	public Stripe() {
@@ -79,7 +78,7 @@ public class Stripe {
 		if (group != null) {
 			json += group.toJSON();
 		} else {
-			json = "null";
+			json += "null";
 		}
 		json += "}";
 		return json;

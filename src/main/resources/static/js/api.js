@@ -86,6 +86,41 @@ function sendAssignModule(moduleId, groupId) {
     });
     return success;
 }
+
+function sendUnassignModule(moduleId) {
+    var url = "http://" + window.location.hostname + "/stripe/unassign";
+    var success = false;
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            stripeId: moduleId
+        },
+        async: false,
+        success: function() {
+            success = true;
+        }
+    });
+    return success;
+}
+
+function sendUpdateModule(moduleId, moduleName) {
+    var url = "http://" + window.location.hostname + "/stripe/update";
+    var success = false;
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            stripeId: moduleId,
+            stripeName: moduleName
+        },
+        async: false,
+        success: function() {
+            success = true;
+        }
+    });
+    return success;
+}
 //==============================================
 
 

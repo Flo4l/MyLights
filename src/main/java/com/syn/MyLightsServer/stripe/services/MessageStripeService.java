@@ -34,20 +34,16 @@ public class MessageStripeService {
 	}
 
 	private void sendMessage(Stripe stripe, String message) {
-		try {
-			Socket socket = new Socket(stripe.getIp(), STRIPE_PORT);
-			OutputStream os = socket.getOutputStream();
-			os.write(message.getBytes());
-			os.flush();
+		new Thread(() -> {
 			try {
+				Socket socket = new Socket(stripe.getIp(), STRIPE_PORT);
+				OutputStream os = socket.getOutputStream();
+				os.write(message.getBytes());
+				os.flush();
 				Thread.sleep(50);
-			} catch (InterruptedException e) {
-
-			}
-			os.close();
-			socket.close();
-		} catch (IOException e) {
-
-		}
+				os.close();
+				socket.close();
+			} catch (IOException | InterruptedException e) {}
+		}).start();
 	}
 }

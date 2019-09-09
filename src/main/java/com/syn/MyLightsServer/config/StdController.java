@@ -7,11 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StdController {
 
 	@GetMapping("/")
-	public String home() {
-		return "sites/testpanel.html";
-	}
-
-	@GetMapping("/panel")
 	public String panel() {
 		return "sites/panel.html";
 	}
