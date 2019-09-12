@@ -9,7 +9,8 @@
      class="container
             pane-duration
             mb-1">
-    <div class="box">
+    <div class="box
+                darker">
         <h3>Dauer</h3>
     </div>
     <!--Sekunden-->
@@ -21,7 +22,8 @@
         <div class="row">
             <div class="col-1
                         offset-3
-                        box"
+                        box
+                        duration-button"
                  onclick="decrementSecs()">
                 <img src="/img/arrow-left.svg">
             </div>
@@ -35,7 +37,8 @@
                        onchange="fetchValues()"/>
             </div>
             <div class="col-1
-                        box"
+                        box
+                        duration-button"
                  onclick="incrementSecs()">
                 <img src="/img/arrow-right.svg">
             </div>
@@ -51,7 +54,8 @@
         <div class="row">
             <div class="col-1
                         offset-3
-                        box"
+                        box
+                        duration-button"
                  onclick="decrementMins()">
                 <img src="/img/arrow-left.svg">
             </div>
@@ -65,7 +69,8 @@
                        onchange="fetchValues()"/>
             </div>
             <div class="col-1
-                        box"
+                        box
+                        duration-button"
                  onclick="incrementMins()">
                 <img src="/img/arrow-right.svg">
             </div>
@@ -81,7 +86,8 @@
         <div class="row">
             <div class="col-1
                         offset-3
-                        box"
+                        box
+                        duration-button"
                  onclick="decrementHours()">
                 <img src="/img/arrow-left.svg">
             </div>
@@ -95,7 +101,8 @@
                        onchange="fetchValues()"/>
             </div>
             <div class="col-1
-                        box"
+                        box
+                        duration-button"
                  onclick="incrementHours()">
                 <img src="/img/arrow-right.svg">
             </div>
@@ -111,7 +118,8 @@
         <div class="row">
             <div class="col-1
                         offset-3
-                        box"
+                        box
+                        duration-button"
                  onclick="decrementDays()">
                 <img src="/img/arrow-left.svg">
             </div>
@@ -119,13 +127,14 @@
                 <input id="days"
                        type="number"
                        min="0"
-                       max="356"
+                       max="365"
                        step="1"
                        value="0"
                        onchange="fetchValues()"/>
             </div>
             <div class="col-1
-                        box"
+                        box
+                        duration-button"
                  onclick="incrementDays()">
                 <img src="/img/arrow-right.svg">
             </div>

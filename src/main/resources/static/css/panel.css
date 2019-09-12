@@ -3,8 +3,11 @@
     text-align: center;
 }
 
-html {
-    background: black;
+body {
+    background: url("/img/background.jpg");
+    background-size: cover;
+    background-repeat:   no-repeat;
+    overflow-x: hidden;
 }
 
 img {
@@ -25,8 +28,15 @@ input[type=number] {
     margin: 0;
 }
 
+#logo {
+    width: 35%;
+    opacity: 0.8;
+    margin-top: -20px;
+}
+
 .pane-main {
-    background-color: #1b1e21;
+    background-color: rgba(27, 30, 33, 1);
+    box-shadow: black 0 0 10px 3px;
     border-radius: 15px;
     position: absolute;
     z-index: 1;
@@ -36,20 +46,26 @@ input[type=number] {
 .pane-options {
     background-color: #4e555b;
     border: solid black 2px;
+    box-shadow: black 0 0 5px 0;
 }
 
 .pane-duration {
     border: solid black 2px;
+    box-shadow: black 0 0 5px 0;
     padding: 0;
+    background-color: #4f545a;
 }
 
 .pane-mode {
     border: solid black 2px;
+    box-shadow: black 0 0 5px 0;
+    background-color: #4f545a;
 }
 
 .list-vertical {
     background-color: #4e555b;
     border: solid black 2px;
+    box-shadow: black 0 0 5px 0;
     overflow: auto;
     overflow-y: auto;
     overflow-x: hidden;
@@ -58,6 +74,7 @@ input[type=number] {
 .list-horizontal {
     background-color: #4e555b;
     border: solid black 2px;
+    box-shadow: black 0 0 5px 0;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
@@ -66,16 +83,26 @@ input[type=number] {
 }
 
 .button-ok {
-    background-color: #28a745;
+    background-color: #2be153;
     border: solid black 2px;
+    box-shadow: black 0 0 3px 0;
     width: 10%;
 }
 
+.button-ok:hover {
+    background-color: #28a745;
+}
+
 .button-decline {
-    background-color: #a70001;
+    background-color: #dd0001;
     border: solid black 2px;
+    box-shadow: black 0 0 3px 0;
     width: 10%;
     padding: 5px;
+}
+
+.button-decline:hover {
+    background-color: #a70001;
 }
 
 .button-decline img {
@@ -83,9 +110,26 @@ input[type=number] {
     height: 60%;
 }
 
+.duration-button{
+    background-color: #687379;
+    box-shadow: black 0 0 2px 0;
+}
+
+.duration-button:hover {
+    background-color: #5b6269;
+}
+
 .box {
     border: solid black 2px;
     padding: 0;
+}
+
+.darker {
+    background-color: #393f45;
+}
+
+#color-picker-container:hover {
+    cursor: grab;
 }
 
 .custom-checkbox {
@@ -147,12 +191,14 @@ input[type=number] {
     background-color: #3d4349;
     display: inline-block;
     float: none;
+    box-shadow: black 0 0 1px 0;
 }
 
 .color {
     margin: 5px;
     display: inline-block;
     float: none;
+    box-shadow: black 0 0 1px 0;
 }
 
 .color-remove {
@@ -167,9 +213,13 @@ input[type=number] {
     box-shadow: 0 0 5px 2px #007bff;
 }
 
-.group {
+.group, #addGroup {
     background-color: #007bff;
     margin: 5px;
+}
+
+.group:hover, #addGroup:hover {
+    background-color: #0071d5;
 }
 
 .group-name {
@@ -183,20 +233,23 @@ input[type=number] {
     float: right;
 }
 
+.btn-remove:hover {
+    background-color: #A00000;
+}
+
 .btn-rename {
-    background-color: green;
+    background-color: #00A000;
     width: 80%;
     height: 50%;
     float: right;
 }
 
-.group-highlight {
-    background-color: #6f42c1;
+.btn-rename:hover {
+    background-color: #007000;
 }
 
-#addGroup {
-    background-color: #007bff;
-    margin: 5px;
+.group-highlight, .group-highlight:hover {
+    background-color: #6f42c1;
 }
 
 .overlay {
@@ -221,13 +274,13 @@ input[type=number] {
     font-size: 20px;
 }
 
-#addModule {
+.module, #addModule {
     background-color: #0cb200;
     margin: 5px;
 }
 
-.module {
-    background-color: #0cb200;
+#addModule:hover {
+    background-color: #0c9100;
     margin: 5px;
 }
 
@@ -243,6 +296,10 @@ input[type=number] {
 .module-unassigned {
     background-color: #a26e85;
     margin: 5px;
+}
+
+.module-unassigned:hover {
+    background-color: #8c5b6f;
 }
 
 .unchecked {
