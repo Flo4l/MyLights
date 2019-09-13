@@ -12,148 +12,154 @@
                 p-5">
         <div class="overlay-panel
                     container
-                    col-6
-                    offset-3
-                    p-4">
+                    col-lg-6
+                    col-sm-8
+                    offset-lg-3
+                    offset-sm-2
+                    p-lg-3
+                    p-sm-2">
             <div id="overlay-newGroup">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                           mb-lg-4
+                           mb-sm-3">
                     Neue Gruppe
-                </h1>
-                <h5 class="overlay-text
-                           mb-5">
+                </div>
+                <div class="headline-small
+                            mb-lg-4
+                            mb-sm-3">
                     Bitte geben Sie einen Namen für die Gruppe ein:
-                </h5>
+                </div>
             </div>
             <div id="overlay-updateGroup">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                            mb-lg-3
+                            mb-sm-3">
                     Gruppe umbenennen
-                </h1>
-                <h5 class="overlay-text
-                           mb-4">
+                </div>
+                <div class="headline-small
+                            mb-lg-4
+                            mb-sm-2">
                     Bitte geben Sie einen neuen Namen für die Gruppe ein:
-                </h5>
-                <h5 class="overlay-groupName
+                </div>
+                <div class="headline
                             mb-3">
                     Gruppenname
-                </h5>
+                </div>
             </div>
             <div id="overlay-updateModule">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                           mb-lg-3
+                           mb-sm-3">
                     Modul umbenennen
-                </h1>
-                <h5 class="overlay-text
-                           mb-4">
+                </div>
+                <div class="headline-small
+                           mb-lg-4
+                           mb-sm-3">
                     Bitte geben Sie einen neuen Namen für das Modul ein:
-                </h5>
-                <h5 class="overlay-moduleName
-                            mb-3">
+                </div>
+                <div class="overlay-moduleName
+                           headline
+                           mb-3">
                     Gruppenname
-                </h5>
+                </div>
             </div>
             <div id="overlay-unassignModule">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                           mb-lg-4
+                           mb-sm-3">
                     Modul entfernen
-                </h1>
-                <h5 class="overlay-text
-                           mb-4">
+                </div>
+                <div class="headline-small
+                           mb-lg-4
+                           mb-sm-3">
                     Wollen Sie das Modul wirklich aus der Gruppe entfernen?
-                </h5>
-                <h5 class="overlay-moduleName
-                            mb-4">
+                </div>
+                <div class="overlay-moduleName
+                           headline
+                           mb-sm-4
+                           mb-lg-5">
                     Modulname
-                </h5>
+                </div>
             </div>
             <div id="overlay-deleteGroup">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                            mb-lg-3
+                            mb-sm-3">
                     Gruppe löschen
-                </h1>
-                <h5 class="overlay-text
-                           mb-5">
+                </div>
+                <div class="headline-small
+                            mb-lg-3
+                            mb-sm-3">
                     Wollen Sie diese Gruppe wirklich löschen?
-                </h5>
-                <h5 class="overlay-groupName
-                            mb-5">
+                </div>
+                <div class="overlay-groupName
+                            headline
+                            mb-lg-5
+                            mb-sm-3">
                     Gruppenname
-                </h5>
+                </div>
             </div>
             <div id="overlay-errorGroup">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="headline-overlay
+                            mb-lg-4
+                            mb-sm-3">
                     Fehler
-                </h1>
-                <h5 class="overlay-text
+                </div>
+                <div class="headline-small
                            mb-5">
                     Das hat leider nicht geklappt :(
-                </h5>
+                </div>
             </div>
             <div id="overlay-assignModule">
-                <h1 class="overlay-heading
-                           mb-4">
+                <div class="overlay-heading
+                            headline-overlay
+                            mb-4">
                     Module zuweisen
-                </h1>
+                </div>
                 <div class="row">
                     <div th:fragment="modulelist"
                          id="assign-modulelist"
                          class="list-vertical
-                                offset-4
-                                col-4
+                                offset-lg-3
+                                offset-sm-2
+                                col-sm-8
+                                col-lg-6
                                 p-0
                                 mb-4">
-                        <div data-id="0"
-                             class="module-unassigned
-                                    row
-                                    box"
-                             onclick="checkModule(this)">
-                            <div class="col-2
-                                        p-1
-                                        ml-2
-                                        mt-2">
-                                <img src="/img/accept.svg"
-                                     data-id="check"
-                                     class="unchecked">
-                            </div>
-                            <div class="module-name
-                                        col-9
-                                        py-3
-                                        px-0">
-                                new module 2
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div id="overlay-confirmGroup">
                 <div class="row">
-                    <div class="button-decline
-                                offset-5
-                                col-1
-                                pt-2"
-                         onclick="closeOverlay()">
-                        <img src="/img/remove.svg">
+                    <div class="col-4
+                                offset-4">
+                        <div class="button-decline
+                                    pt-lg-2
+                                    pt-sm-0
+                                    float-none"
+                             style="margin: auto"
+                             onclick="closeOverlay()">
+                            <img src="/img/remove.svg">
+                        </div>
                     </div>
                 </div>
             </div>
             <div id="overlay-affirmationGroup">
                 <div class="row">
-                    <div class="button-ok
-                                col-1
-                                offset-5
-                                pt-2
-                                mr-2"
-                         onclick="createGroup()">
-                        <img src="/img/accept.svg">
-                    </div>
-                    <div class="button-decline
-                                col-1
-                                pt-2
-                                ml-2"
-                         onclick="closeOverlay()">
-                        <img src="/img/remove.svg">
+                    <div class="col-4
+                                offset-4">
+                        <div class="button-ok
+                                    pt-lg-2
+                                    pt-sm-0"
+                             onclick="createGroup()">
+                            <img src="/img/accept.svg">
+                        </div>
+                        <div class="button-decline
+                                    pt-lg-2
+                                    pt-sm-0"
+                             onclick="closeOverlay()">
+                            <img src="/img/remove.svg">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,20 +169,20 @@
                        type="text"
                        maxlength="15">
                 <div class="row">
-                    <div class="button-ok
-                                col-1
-                                offset-5
-                                pt-2
-                                mr-2"
-                         onclick="createGroup()">
-                        <img src="/img/accept.svg">
-                    </div>
-                    <div class="button-decline
-                                col-1
-                                pt-2
-                                ml-2"
-                         onclick="closeOverlay()">
-                        <img src="/img/remove.svg">
+                    <div class="col-4
+                                offset-4">
+                        <div class="button-ok
+                                    pt-lg-2
+                                    pt-sm-0"
+                             onclick="createGroup()">
+                            <img src="/img/accept.svg">
+                        </div>
+                        <div class="button-decline
+                                    pt-lg-2
+                                    pt-sm-0"
+                             onclick="closeOverlay()">
+                            <img src="/img/remove.svg">
+                        </div>
                     </div>
                 </div>
             </div>

@@ -91,7 +91,8 @@ function getHTMLColor(colorString) {
     var id = $(".color").length;
     return "<div class=\"color\n" +
         "                box" +
-        "                col-1\"\n" +
+        "                col-lg-1" +
+        "                col-sm-2\"\n" +
         "        data-id=\"" + id + "\"\n" +
         "        style=\"background-color: " + colorString + "\"\n" +
         "        onclick=\"setActiveColor(this)\">\n" +
@@ -301,23 +302,47 @@ function getHTMLModule(moduleName) {
         "         class=\"box\n" +
         "                module\n" +
         "                row\">\n" +
-        "        <div class=\"col-10\n" +
+        "        <div class=\"col-lg-9\n" +
+        "                    col-sm-12\n" +
         "                    module-name\n" +
-        "                    p-0\n" +
-        "                    mt-3\">\n" +
+        "                    p-lg-0\n" +
+        "                    p-sm-1\n" +
+        "                    order-sm-last\n" +
+        "                    order-lg-first\n" +
+        "                    mt-sm-0\n" +
+        "                    mt-lg-3\">\n" +
         "            " + moduleName + "\n" +
         "        </div>\n" +
-        "        <div class=\"col-2\n" +
-        "                    p-0\">\n" +
+        "        <div class=\"d-block " +
+        "                     d-lg-none\">\n" +
         "            <div class=\"box\n" +
         "                        btn-remove\n" +
-        "                        pb-2\"\n" +
+        "                        col-sm-6\"\n" +
         "                 onclick=\"showUnassignModuleOverlay(this)\">\n" +
         "                <img src=\"/img/remove.svg\">\n" +
         "            </div>\n" +
         "            <div class=\"box\n" +
         "                        btn-rename\n" +
-        "                        pb-1\" onclick=\"showUpdateModuleOverlay(this)\">\n" +
+        "                        col-sm-6\" " +
+        "                 onclick=\"showUpdateModuleOverlay(this)\">\n" +
+        "                <img src=\"/img/pencil.svg\">\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "        <div class=\"d-none " +
+        "                     d-lg-block\n" +
+        "                     col-lg-3" +
+        "                     p-0\">\n" +
+        "            <div class=\"box\n" +
+        "                        btn-remove\n" +
+        "                        pb-lg-0\n" +
+        "                        pb-sm-3\"\n" +
+        "                 onclick=\"showUnassignModuleOverlay(this)\">\n" +
+        "                <img src=\"/img/remove.svg\">\n" +
+        "            </div>\n" +
+        "            <div class=\"box\n" +
+        "                        btn-rename\n" +
+        "                        pb-lg-1\n" +
+        "                        pb-sm-2\" onclick=\"showUpdateModuleOverlay(this)\">\n" +
         "                <img src=\"/img/pencil.svg\">\n" +
         "            </div>\n" +
         "        </div>\n" +
@@ -377,12 +402,14 @@ function getHTMLUnassignedModule(moduleName) {
         "       <div class=\"col-2\n" +
         "                    p-1\n" +
         "                    ml-2\n" +
-        "                    mt-2\">\n" +
+        "                    mt-sm-0\n" +
+        "                    mt-lg-2\">\n" +
         "           <img src=\"/img/accept.svg\"\n" +
         "                data-id=\"check\"\n" +
         "                class=\"unchecked\">\n" +
         "       </div>\n" +
         "       <div class=\"module-name\n" +
+        "                    headline\n" +
         "                    col-9\n" +
         "                    py-2\n" +
         "                    px-0\">\n" +
@@ -497,24 +524,47 @@ function getHTMLGroup(groupName) {
         "                group\n" +
         "                row\"\n" +
         "         onclick=\"setActiveGroup(this)\">\n" +
-        "        <div class=\"col-10\n" +
+        "        <div class=\"col-lg-9\n" +
+        "                    col-sm-12\n" +
         "                    group-name\n" +
-        "                    p-0\n" +
-        "                    mt-3\">\n" +
+        "                    order-sm-last\n" +
+        "                    order-lg-first\n" +
+        "                    p-lg-0\n" +
+        "                    p-sm-1\n" +
+        "                    mt-sm-0\n" +
+        "                    mt-lg-3\">\n" +
         "                " + groupName + "\n" +
         "        </div>\n" +
-        "        <div class=\"col-2\n" +
-        "                    p-0\">\n" +
+        "        <div class=\"d-block " +
+        "                     d-lg-none\">\n" +
         "            <div class=\"box\n" +
         "                        btn-remove\n" +
-        "                        pb-2\"\n" +
+        "                        col-sm-6\"\n" +
         "                 onclick=\"showDeleteGroupOverlay(this)\">\n" +
         "                <img src=\"/img/remove.svg\">\n" +
         "            </div>\n" +
         "            <div class=\"box\n" +
         "                        btn-rename\n" +
-        "                        pb-1\"\n" +
+        "                        col-sm-6\" " +
         "                 onclick=\"showUpdateGroupOverlay(this)\">\n" +
+        "                <img src=\"/img/pencil.svg\">\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "        <div class=\"d-none " +
+        "                     d-lg-block\n" +
+        "                     col-lg-3" +
+        "                     p-0\">\n" +
+        "            <div class=\"box\n" +
+        "                        btn-remove\n" +
+        "                        pb-lg-0\n" +
+        "                        pb-sm-3\"\n" +
+        "                 onclick=\"showDeleteGroupOverlay(this)\">\n" +
+        "                <img src=\"/img/remove.svg\">\n" +
+        "            </div>\n" +
+        "            <div class=\"box\n" +
+        "                        btn-rename\n" +
+        "                        pb-lg-1\n" +
+        "                        pb-sm-2\" onclick=\"showUpdateGroupOverlay(this)\">\n" +
         "                <img src=\"/img/pencil.svg\">\n" +
         "            </div>\n" +
         "        </div>\n" +
@@ -526,7 +576,7 @@ function getHTMLGroup(groupName) {
 
 //JQuery events
 //==============================================
-$(document).keyup(function (e) {
+$(document).keyup(function(e) {
     //Enter
     if (e.keyCode === 13) {
         if(overlay.is(":hidden")) {
@@ -560,6 +610,10 @@ $(document).keyup(function (e) {
             overlayDeclineButtons.click();
         }
     }
+});
+
+$(document).scroll(function() {
+   overlay.offset({top: $(window).scrollTop(),left: $(window).scrollLeft()});
 });
 //==============================================
 

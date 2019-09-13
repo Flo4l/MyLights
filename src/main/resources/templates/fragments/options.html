@@ -14,10 +14,22 @@
             mb-1
             p-3
             pr-0">
-    <div class="col-7"
-         id="color-picker-container">
+    <div id="color-picker-container"
+         class="col-lg-7
+                col-sm-12
+                order-sm-first
+                order-sm-last
+                mt-sm-3
+                mt-lg-0">
     </div>
-    <div class="col-5">
+    <div class="col-lg-5
+                col-sm-12
+                mt-lg-3
+                mt-sm-0
+                px-sm-0
+                px-lg-1
+                order-lg-last
+                order-sm-first">
         <div th:replace="~{fragments/durationpane.html :: durationpane}"></div>
         <div th:replace="~{fragments/modepane.html :: modepane}"></div>
     </div>
