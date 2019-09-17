@@ -6,33 +6,33 @@ import javax.persistence.*;
 @Table(name = "role")
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int roleID;
 
-    private String role;
+	private String role;
 
-    public Role() {
-        this("");
-    }
+	public Role() {
+		this("");
+	}
 
-    public Role(String role) {
-        this.role = role;
-    }
+	public Role(String role) {
+		this.role = role;
+	}
 
-    public int getRoleID() {
-        return roleID;
-    }
+	public int getRoleID() {
+		return roleID;
+	}
 
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
-    }
+	public void setRoleID(int roleID) {
+		this.roleID = roleID;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

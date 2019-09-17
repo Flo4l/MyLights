@@ -19,14 +19,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private DataSource dataSource;
 
-    @Value("${spring.queries.users-query}")
-    private String usersQuery;
+	@Value("${spring.queries.users-query}")
+	private String usersQuery;
 
-    @Value("${spring.queries.roles-query}")
-    private String rolesQuery;
+	@Value("${spring.queries.roles-query}")
+	private String rolesQuery;
 
 	@Autowired
-	public SecurityConfig( DataSource dataSource) {
+	public SecurityConfig(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
@@ -35,12 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			throws Exception {
 		auth.inMemoryAuthentication().withUser("username")
 				.password("password").roles("USER");
-}
+	}
 
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/**")
-                .authenticated()
+				.authenticated()
 				.and()
 				.logout()
 				.logoutUrl("/logout")
