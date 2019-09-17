@@ -310,7 +310,7 @@ function getHTMLModule(moduleName) {
         "                    order-sm-last\n" +
         "                    order-lg-first\n" +
         "                    mt-sm-0\n" +
-        "                    mt-lg-3\">\n" +
+        "                    mt-lg-4\">\n" +
         "            " + moduleName + "\n" +
         "        </div>\n" +
         "        <div class=\"d-block " +
@@ -334,6 +334,7 @@ function getHTMLModule(moduleName) {
         "                     p-0\">\n" +
         "            <div class=\"box\n" +
         "                        btn-remove\n" +
+        "                        pt-lg-1\n" +
         "                        pb-lg-0\n" +
         "                        pb-sm-3\"\n" +
         "                 onclick=\"showUnassignModuleOverlay(this)\">\n" +
@@ -341,6 +342,7 @@ function getHTMLModule(moduleName) {
         "            </div>\n" +
         "            <div class=\"box\n" +
         "                        btn-rename\n" +
+        "                        pt-lg-1\n" +
         "                        pb-lg-1\n" +
         "                        pb-sm-2\" onclick=\"showUpdateModuleOverlay(this)\">\n" +
         "                <img src=\"/img/pencil.svg\">\n" +
@@ -532,7 +534,7 @@ function getHTMLGroup(groupName) {
         "                    p-lg-0\n" +
         "                    p-sm-1\n" +
         "                    mt-sm-0\n" +
-        "                    mt-lg-3\">\n" +
+        "                    mt-lg-4\">\n" +
         "                " + groupName + "\n" +
         "        </div>\n" +
         "        <div class=\"d-block " +
@@ -556,6 +558,7 @@ function getHTMLGroup(groupName) {
         "                     p-0\">\n" +
         "            <div class=\"box\n" +
         "                        btn-remove\n" +
+        "                        pt-lg-1\n" +
         "                        pb-lg-0\n" +
         "                        pb-sm-3\"\n" +
         "                 onclick=\"showDeleteGroupOverlay(this)\">\n" +
@@ -563,6 +566,7 @@ function getHTMLGroup(groupName) {
         "            </div>\n" +
         "            <div class=\"box\n" +
         "                        btn-rename\n" +
+        "                        pt-lg-1\n" +
         "                        pb-lg-1\n" +
         "                        pb-sm-2\" onclick=\"showUpdateGroupOverlay(this)\">\n" +
         "                <img src=\"/img/pencil.svg\">\n" +
