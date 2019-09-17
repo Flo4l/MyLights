@@ -69,6 +69,7 @@ input[type=number] {
     overflow: auto;
     overflow-y: auto;
     overflow-x: hidden;
+    height: available;
 }
 
 .list-horizontal {
@@ -103,11 +104,6 @@ input[type=number] {
 
 .button-decline:hover {
     background-color: #a70001;
-}
-
-.button-decline img {
-    width: 80%;
-    height: 60%;
 }
 
 .duration-button{
@@ -318,6 +314,32 @@ input[type=number] {
     font-size: 15px;
 }
 
+.overlay .button-ok img {
+    width: 80%;
+    height: 80%;
+}
+
+.button-decline img {
+    width: 80%;
+    height: 80%;
+}
+
+.overlay .button-ok {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.overlay .button-decline {
+    float: right;
+    width: 30%;
+    height: 100%;
+}
+
+.btngroup {
+    margin-left: 38%;
+}
+
 @media only screen and (max-width: 1080px) and (max-height: 900px) {
 
     body {
@@ -429,5 +451,17 @@ input[type=number] {
 
     .group, .module {
         text-align: center;
+    }
+
+    .overlay .button-ok {
+        float: left;
+    }
+
+    .overlay .button-decline {
+        float: right;
+    }
+
+    .btngroup {
+        margin-left: 35%;
     }
 }
