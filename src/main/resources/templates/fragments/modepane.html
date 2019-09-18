@@ -11,7 +11,10 @@
             pane-mode">
     <div class="box
                 darker">
-        <div class="container headline">Modus</div>
+        <div class="container
+                    headline"
+             th:text="#{mode}">
+        </div>
     </div>
     <div class="row
                 box
@@ -32,8 +35,8 @@
                     pb-sm-0
                     pt-sm-1
                     pt-lg-0
-                    headline">
-            Überlaufende Farben
+                    headline"
+             th:text="#{mode.fading}">
         </div>
     </div>
 </div>
