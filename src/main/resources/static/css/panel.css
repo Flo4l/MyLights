@@ -34,6 +34,28 @@ input[type=number] {
     margin-top: -10px;
 }
 
+.pane-settings {
+    background-color: rgba(27, 30, 33, 1);
+    box-shadow: black 0 0 10px 3px;
+    border-radius: 5px;
+    border: #767676 solid 1px;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 5%;
+    margin-left: 94%;
+    padding: 5px;
+}
+
+.pane-settings:hover {
+    box-shadow: #565656 0 0 10px 3px;
+}
+
+.pane-settings img {
+    width: 60%;
+    height: 60%;
+}
+
 .pane-main {
     background-color: rgba(27, 30, 33, 1);
     box-shadow: black 0 0 10px 3px;
@@ -190,11 +212,19 @@ input[type=number] {
     box-shadow: black 0 0 1px 0;
 }
 
+#addColor:hover {
+    box-shadow: 0 0 4px 1px rgb(167, 167, 167);
+}
+
 .color {
     margin: 5px;
     display: inline-block;
     float: none;
     box-shadow: black 0 0 1px 0;
+}
+
+.color:hover {
+    box-shadow: 0 0 4px 1px rgb(167, 167, 167);
 }
 
 .color-remove {
@@ -264,7 +294,7 @@ input[type=number] {
     margin: auto;
 }
 
-#overlay-input {
+.overlay input {
     border: solid black 2px;
     color: black;
     font-size: 20px;
@@ -338,6 +368,17 @@ input[type=number] {
 
 .btngroup {
     margin-left: 38%;
+}
+
+.setting-button {
+    background-color: #333333;
+    border-radius: 10px;
+    box-shadow: 0 0 3px 1px rgb(60, 60, 60);
+    padding: 5px;
+}
+
+.setting-button:hover {
+    box-shadow: 0 0 4px 1px rgb(122, 122, 122);
 }
 
 @media only screen and (max-width: 1080px) and (max-height: 900px) {

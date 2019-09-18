@@ -4,8 +4,6 @@ import com.syn.MyLightsServer.group.exceptions.GroupAlreadyExistingException;
 import com.syn.MyLightsServer.group.exceptions.InvalidGroupNameException;
 import com.syn.MyLightsServer.group.persistence.Group;
 import com.syn.MyLightsServer.group.persistence.GroupRepository;
-import com.syn.MyLightsServer.stripe.persistence.Stripe;
-import com.syn.MyLightsServer.stripe.persistence.StripeRepository;
 import com.syn.MyLightsServer.stripe.services.UnassignStripeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
