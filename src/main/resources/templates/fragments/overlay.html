@@ -21,100 +21,96 @@
             <div id="overlay-newGroup">
                 <div class="headline-overlay
                            mb-lg-4
-                           mb-sm-3">
-                    Neue Gruppe
+                           mb-sm-3"
+                     th:text="#{overlay.group.new.headline}">
                 </div>
                 <div class="headline-small
                             mb-lg-4
-                            mb-sm-3">
-                    Bitte geben Sie einen Namen für die Gruppe ein:
+                            mb-sm-3"
+                     th:text="#{overlay.group.new.text}">
                 </div>
             </div>
             <div id="overlay-updateGroup">
                 <div class="headline-overlay
                             mb-lg-3
-                            mb-sm-3">
-                    Gruppe umbenennen
+                            mb-sm-3"
+                     th:text="#{overlay.group.rename.headline}">
                 </div>
                 <div class="headline-small
                             mb-lg-4
-                            mb-sm-2">
-                    Bitte geben Sie einen neuen Namen für die Gruppe ein:
+                            mb-sm-2"
+                     th:text="#{overlay.group.rename.text}">
                 </div>
                 <div class="headline
                             mb-3">
-                    Gruppenname
                 </div>
             </div>
             <div id="overlay-updateModule">
                 <div class="headline-overlay
                            mb-lg-3
-                           mb-sm-3">
-                    Modul umbenennen
+                           mb-sm-3"
+                     th:text="#{overlay.module.rename.headline}">
                 </div>
                 <div class="headline-small
                            mb-lg-4
-                           mb-sm-3">
-                    Bitte geben Sie einen neuen Namen für das Modul ein:
+                           mb-sm-3"
+                     th:text="#{overlay.module.rename.text}">
                 </div>
                 <div class="overlay-moduleName
                            headline
                            mb-3">
-                    Gruppenname
                 </div>
             </div>
             <div id="overlay-unassignModule">
                 <div class="headline-overlay
                            mb-lg-4
-                           mb-sm-3">
-                    Modul entfernen
+                           mb-sm-3"
+                     th:text="#{overlay.module.unassign.headline}">
                 </div>
                 <div class="headline-small
                            mb-lg-4
-                           mb-sm-3">
-                    Wollen Sie das Modul wirklich aus der Gruppe entfernen?
+                           mb-sm-3"
+                     th:text="#{overlay.module.unassign.text}">
                 </div>
                 <div class="overlay-moduleName
                            headline
                            mb-sm-4
                            mb-lg-5">
-                    Modulname
                 </div>
             </div>
             <div id="overlay-deleteGroup">
                 <div class="headline-overlay
                             mb-lg-3
-                            mb-sm-3">
-                    Gruppe löschen
+                            mb-sm-3"
+                     th:text="#{overlay.group.delete.headline}">
                 </div>
                 <div class="headline-small
                             mb-lg-3
-                            mb-sm-3">
-                    Wollen Sie diese Gruppe wirklich löschen?
+                            mb-sm-3"
+                     th:text="#{overlay.group.delete.text}">
                 </div>
                 <div class="overlay-groupName
                             headline
                             mb-lg-5
                             mb-sm-3">
-                    Gruppenname
                 </div>
             </div>
             <div id="overlay-errorGroup">
                 <div class="headline-overlay
                             mb-lg-4
-                            mb-sm-3">
-                    Fehler
+                            mb-sm-3"
+                    th:text="#{overlay.error.headline}">
                 </div>
                 <div class="headline-small
-                           mb-5">
-                    Das hat leider nicht geklappt :(
+                           mb-5"
+                     th:text="#{overlay.error.text}">
                 </div>
             </div>
             <div id="overlay-assignModule">
                 <div class="overlay-heading
                             headline-overlay
-                            mb-4">
-                    Module zuweisen
+                            mb-4"
+                    th:text="#{overlay.module.assign.headline}">
                 </div>
                 <div class="row">
                     <div th:fragment="modulelist"

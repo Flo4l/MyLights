@@ -10,14 +10,18 @@
             mb-1">
     <div class="box
                 darker">
-        <div class="headline">Dauer</div>
+        <div class="headline"
+             th:text="#{duration}">
+        </div>
     </div>
     <!--Sekunden-->
     <div class="box
                 pb-1">
         <div class="row">
             <div class="container
-                        headline-small">Sekunden</div>
+                        headline-small"
+                 th:text="#{duration.seconds}">
+            </div>
         </div>
         <div class="row">
             <div class="col-1
@@ -50,7 +54,9 @@
                 pb-1">
         <div class="row">
             <div class="container
-                       headline-small">Minuten</div>
+                       headline-small"
+                 th:text="#{duration.minutes}">
+            </div>
         </div>
         <div class="row">
             <div class="col-1
@@ -83,7 +89,9 @@
                 pb-1">
         <div class="row">
             <div class="container
-                       headline-small">Stunden</div>
+                       headline-small"
+                 th:text="#{duration.hours}">
+            </div>
         </div>
         <div class="row">
             <div class="col-1
@@ -116,7 +124,9 @@
                 pb-1">
         <div class="row">
             <div class="container
-                       headline-small">Tage</div>
+                       headline-small"
+                 th:text="#{duration.days}">
+            </div>
         </div>
         <div class="row">
             <div class="col-1
