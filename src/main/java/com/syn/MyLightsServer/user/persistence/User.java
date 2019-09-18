@@ -2,7 +2,6 @@ package com.syn.MyLightsServer.user.persistence;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")

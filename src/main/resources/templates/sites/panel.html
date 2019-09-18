@@ -23,9 +23,9 @@
                 <div th:replace="~{fragments/grouplist.html :: grouplist}"></div>
                 <div class="container
                             col-7
-                            m-lg-4
+                            m-lg-2
                             m-sm-3
-                            p-0">
+                            p-2">
                     <img id="logo"
                          src="/img/logo3.png">
                     <div id="group-name-headline"
@@ -42,6 +42,11 @@
                 </div>
                 <div th:replace="~{fragments/modulelist.html :: modulelist}"></div>
             </div>
+        </div>
+        <div class="pane-settings
+                    mt-3"
+             onclick="showSettingOverlay()">
+            <img src="/img/settings.png">
         </div>
     </div>
     <div th:replace="~{fragments/overlay.html :: overlay}"></div>

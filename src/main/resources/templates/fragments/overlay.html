@@ -47,35 +47,35 @@
             </div>
             <div id="overlay-updateModule">
                 <div class="headline-overlay
-                           mb-lg-3
-                           mb-sm-3"
+                            mb-lg-3
+                            mb-sm-3"
                      th:text="#{overlay.module.rename.headline}">
                 </div>
                 <div class="headline-small
-                           mb-lg-4
-                           mb-sm-3"
+                            mb-lg-4
+                            mb-sm-3"
                      th:text="#{overlay.module.rename.text}">
                 </div>
                 <div class="overlay-moduleName
-                           headline
-                           mb-3">
+                            headline
+                            mb-3">
                 </div>
             </div>
             <div id="overlay-unassignModule">
                 <div class="headline-overlay
-                           mb-lg-4
-                           mb-sm-3"
+                            mb-lg-4
+                            mb-sm-3"
                      th:text="#{overlay.module.unassign.headline}">
                 </div>
                 <div class="headline-small
-                           mb-lg-4
-                           mb-sm-3"
+                            mb-lg-4
+                            mb-sm-3"
                      th:text="#{overlay.module.unassign.text}">
                 </div>
                 <div class="overlay-moduleName
-                           headline
-                           mb-sm-4
-                           mb-lg-5">
+                            headline
+                            mb-sm-4
+                            mb-lg-5">
                 </div>
             </div>
             <div id="overlay-deleteGroup">
@@ -102,7 +102,7 @@
                     th:text="#{overlay.error.headline}">
                 </div>
                 <div class="headline-small
-                           mb-5"
+                            mb-5"
                      th:text="#{overlay.error.text}">
                 </div>
             </div>
@@ -123,6 +123,72 @@
                                 p-0
                                 mb-4">
                     </div>
+                </div>
+            </div>
+            <div id="overlay-settingGroup"
+                 class="row">
+                <div class="headline-overlay
+                            mb-lg-4
+                            mb-sm-3
+                            col-lg-6
+                            offset-lg-3"
+                     th:text="#{overlay.settings}">
+                </div>
+                <div class="box
+                            setting-button
+                            mb-4
+                            col-lg-6
+                            col-sm-8
+                            offset-sm-2
+                            offset-lg-3"
+                     onclick="showChangePassGroup()"
+                     th:text="#{overlay.settings.changePass}">
+                </div>
+            </div>
+            <div id="overlay-changePassGroup">
+                <div class="headline-overlay
+                            mb-lg-4
+                            mb-sm-3"
+                     th:text="#{overlay.settings.changePass}">
+                </div>
+                <div class="row
+                            mb-1">
+                    <div class="headline-small
+                            col-3
+                            p-2">
+                        Altes PW
+                    </div>
+                    <input id="overlay-pass-old"
+                           class="col-lg-6
+                                  col-sm-8"
+                           type="password"
+                           minlength="8">
+                </div>
+                <div class="row
+                            mb-1">
+                    <div class="headline-small
+                            col-3
+                            p-2">
+                        Neues PW
+                    </div>
+                    <input id="overlay-pass"
+                           class="col-lg-6
+                                  col-sm-8"
+                           type="password"
+                           minlength="8">
+                </div>
+                <div class="row">
+                    <div class="headline-small
+                            col-3
+                            p-2">
+                        Neues PW
+                    </div>
+                    <input id="overlay-pass-check"
+                           class="col-lg-6
+                                  col-sm-8
+                                  mb-4"
+                           type="password"
+                           minlength="8">
                 </div>
             </div>
             <div id="overlay-confirmGroup">

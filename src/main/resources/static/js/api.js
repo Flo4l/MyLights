@@ -121,6 +121,25 @@ function sendUpdateModule(moduleId, moduleName) {
     });
     return success;
 }
+
+function sendChangePassword(oldPass, newPass, newPassCheck) {
+    var url = "http://" + window.location.hostname + "/settings/changepass";
+    var success = false;
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            oldPass: oldPass,
+            newPass: newPass,
+            newPassCheck: newPassCheck
+        },
+        async: false,
+        success: function() {
+            success = true;
+        }
+    });
+    return success;
+}
 //==============================================
 
 

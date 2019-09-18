@@ -1,8 +1,6 @@
 package com.syn.MyLightsServer.stripe.persistence;
 
 import com.syn.MyLightsServer.group.persistence.Group;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

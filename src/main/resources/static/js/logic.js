@@ -578,6 +578,22 @@ function getHTMLGroup(groupName) {
 //==============================================
 
 
+//Settings
+//==============================================
+function changePassword() {
+    var oldPass = overlayOldPassInput.val();
+    var newPass = overlayPassInput.val();
+    var newPassCheck = overlayPassCheckInput.val();
+    if(oldPass.length >= 8 && newPass.length >= 8 && newPassCheck.length >= 8) {
+        closeOverlay();
+        if(!sendChangePassword(oldPass, newPass, newPassCheck)) {
+            showErrorOverlay();
+        }
+    }
+}
+//==============================================
+
+
 //JQuery events
 //==============================================
 $(document).keyup(function(e) {
