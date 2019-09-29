@@ -232,7 +232,7 @@ void setup() {
   Serial.println(serverAddress);
   while(!registerAtServer()) {
     Serial.print(".");
-    delay(500);
+    delay(1000);
   }
   Serial.println("Server connected.");
   Serial.println("");
