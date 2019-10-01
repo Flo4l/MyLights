@@ -584,7 +584,7 @@ function changePassword() {
     var oldPass = overlayOldPassInput.val();
     var newPass = overlayPassInput.val();
     var newPassCheck = overlayPassCheckInput.val();
-    if(oldPass.length >= 8 && newPass.length >= 8 && newPassCheck.length >= 8) {
+    if(oldPass.length > 0 && newPass.length >= 1 && newPassCheck.length >= 1) {
         closeOverlay();
         if(!sendChangePassword(oldPass, newPass, newPassCheck)) {
             showErrorOverlay();

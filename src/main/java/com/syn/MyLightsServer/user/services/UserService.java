@@ -5,13 +5,12 @@ import com.syn.MyLightsServer.user.persistence.RoleRepository;
 import com.syn.MyLightsServer.user.persistence.User;
 import com.syn.MyLightsServer.user.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import javax.annotation.PostConstruct;
 
 @Service
 public class UserService {
@@ -20,7 +19,9 @@ public class UserService {
 	private final RoleRepository roleRepository;
 	private final PasswordEncoder passwordEncoder;
 
+	@Value("${application.user.username}")
 	private String username;
+	@Value("${application.user.defaultPassword}")
 	private String defaultPass;
 
 	@Autowired
@@ -28,32 +29,16 @@ public class UserService {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.passwordEncoder = passwordEncoder;
-		loadProperties();
-		createDefaultRolesIfNotExist();
-		createDefaultUserIfNotExists();
 	}
 
-	private void loadProperties() {
-		try {
-			Properties properties = new Properties();
-			properties.load(new FileInputStream("src/main/resources/application.properties"));
-			defaultPass = new BCryptPasswordEncoder().encode(
-					properties.getProperty("application.user.defaultPassword"));
-			username = properties.getProperty("application.user.username");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void createDefaultRolesIfNotExist() {
+	@PostConstruct
+	private void createDefaultUserAndRoleIfNotExist() {
 		if (roleRepository.findAll().size() < 1) {
 			Role role = new Role("USER");
 			roleRepository.save(role);
 		}
-	}
-
-	private void createDefaultUserIfNotExists() {
 		if (userRepository.findAll().size() < 1) {
+			defaultPass = new BCryptPasswordEncoder().encode(defaultPass);
 			User user = new User(username, defaultPass);
 			user.setEnabled(1);
 			Role role = roleRepository.findByRole("USER");
